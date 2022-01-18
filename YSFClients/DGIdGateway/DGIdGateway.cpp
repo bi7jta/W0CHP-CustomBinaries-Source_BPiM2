@@ -70,7 +70,7 @@ int main(int argc, char** argv)
 		for (int currentArg = 1; currentArg < argc; ++currentArg) {
 			std::string arg = argv[currentArg];
 			if ((arg == "-v") || (arg == "--version")) {
-                ::fprintf(stdout, "DGIdGateway version %s git #%.7s\n", VERSION, gitversion);
+				::fprintf(stdout, "DGIdGateway version %s git #%.7s\n", VERSION, gitversion);
 				return 0;
 			} else if (arg.substr(0, 1) == "-") {
 				::fprintf(stderr, "Usage: DGIdGateway [-v|--version] [filename]\n");
@@ -408,8 +408,8 @@ int CDGIdGateway::run()
 	CStopWatch stopWatch;
 	stopWatch.start();
 
-    LogMessage("DGIdGateway-%s is starting", VERSION);
-    LogMessage("Built %s %s (GitID #%.7s)", __TIME__, __DATE__, gitversion);
+	LogMessage("DGIdGateway-%s is starting", VERSION);
+ 	LogMessage("Built %s %s (GitID #%.7s)", __TIME__, __DATE__, gitversion);
 
 	DGID_STATUS state = DS_NOTLINKED;
 	unsigned int nPips = 0U;
