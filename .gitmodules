@@ -4,3 +4,12 @@
 [submodule "DMRGateway"]
 	path = DMRGateway
 	url = https://github.com/g4klx/DMRGateway.git
+[submodule "M17Gateway"]
+	path = M17Gateway
+	url = https://github.com/g4klx/M17Gateway.git
+[submodule "YSFClients"]
+	path = YSFClients
+	url = https://github.com/g4klx/YSFClients.git
+[submodule "APRSGateway"]
+	path = APRSGateway
+	url = https://github.com/g4klx/APRSGateway.git
