@@ -1,3 +1,6 @@
 [submodule "MMDVMHost"]
 	path = MMDVMHost
 	url = https://github.com/g4klx/MMDVMHost.git
+[submodule "DMRGateway"]
+	path = DMRGateway
+	url = https://github.com/g4klx/DMRGateway.git
