@@ -13,3 +13,6 @@
 [submodule "APRSGateway"]
 	path = APRSGateway
 	url = https://github.com/g4klx/APRSGateway.git
+[submodule "MMDVMCal"]
+	path = MMDVMCal
+	url = https://github.com/g4klx/MMDVMCal.git
