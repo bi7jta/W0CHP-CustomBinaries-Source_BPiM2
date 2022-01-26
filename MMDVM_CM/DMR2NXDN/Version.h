@@ -20,6 +20,6 @@
 #if !defined(VERSION_H)
 #define	VERSION_H
 
-const char* VERSION = "2020050_W0CHP3";
+const char* VERSION = "2020050_W0CHP";
 
 #endif
