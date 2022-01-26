@@ -1,0 +1,3 @@
+[submodule "MMDVMHost"]
+	path = MMDVMHost
+	url = https://github.com/g4klx/MMDVMHost.git
