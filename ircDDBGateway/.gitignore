@@ -1,0 +1,11 @@
+*.o
+*.obj
+x86
+Debug
+Release
+*.user
+*~
+*.bak
+.vs
+*.a
+*.d
