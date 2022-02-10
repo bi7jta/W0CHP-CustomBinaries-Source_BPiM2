@@ -4,7 +4,7 @@ I use this program in `W0CHP-PiStar-Dash` for the "Display Changelog Function".
 The goal was to use a fast, C-based parser/outputter to render the git change
 logs in HTML.
 
-I modified this source to include the haard-coded dashboard git repo path for
+I modified this source to include the hard-coded dashboard git repo path for
 speed and ease (too lazy to refactor the args LOL), along with output tweaks.
 
 Since this is installed in `/usr/local/bin`, I include the source here!
