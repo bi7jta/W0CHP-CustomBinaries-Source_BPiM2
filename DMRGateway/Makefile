@@ -36,6 +36,7 @@ clean:
 install:
 		install -m 755 DMRGateway /usr/local/bin/
 
+# Export the current git version if the index file exists, else 000...
 GitVersion.h:
-		echo "const char *gitversion = \"$(shell git rev-parse HEAD)\";" > $@
+	echo "const char *gitversion = \"$(shell git rev-parse HEAD)\";" > $@
 
