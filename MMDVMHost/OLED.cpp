@@ -244,7 +244,7 @@ bool COLED::open()
 
     OLED_statusbar();
     m_display.setCursor(0,OLED_LINE3);
-    m_display.print("Startup");
+    m_display.print("Initializing");
     m_display.display();
 
     return true;
@@ -325,7 +325,7 @@ void COLED::setQuitInt()
 
     m_display.setCursor(0,30);
     m_display.setTextSize(3);
-    m_display.print("Stopped");
+    m_display.print("Stopping");
 
     m_display.setTextSize(1);
     m_display.display();
@@ -374,7 +374,7 @@ void COLED::clearDStarInt()
     m_display.fillRect(0,OLED_LINE3, m_display.width(),m_display.height(),BLACK); //clear everything beneath the logo
 
     m_display.setCursor(40,OLED_LINE3);
-    m_display.print("Listening");
+    m_display.print("Standby");
 
     m_display.setCursor(0,OLED_LINE5);
     m_display.printf("%s",m_ipaddress.c_str());
@@ -454,18 +454,18 @@ void COLED::clearDMRInt(unsigned int slotNo)
         if (slotNo == 1U) {
             m_display.fillRect(0, OLED_LINE3, m_display.width(), 40, BLACK);
             m_display.setCursor(0,OLED_LINE3);
-            m_display.print("Slot: 1 Listening");
+            m_display.print("Slot: 1 Standby");
         }
         else {
             m_display.fillRect(0, OLED_LINE5, m_display.width(), 40, BLACK);
             m_display.setCursor(0, OLED_LINE5);
-            m_display.print("Slot: 2 Listening");
+            m_display.print("Slot: 2 Standby");
         }
     }
     else {
         m_display.fillRect(0, OLED_LINE2, m_display.width(), m_display.height(), BLACK);
         m_display.setCursor(0,OLED_LINE3);
-        m_display.printf("Slot: %i Listening",slotNo);
+        m_display.printf("Slot: %i Standby",slotNo);
     }
 
     m_display.fillRect(0, OLED_LINE6, m_display.width(), 20, BLACK);
@@ -497,7 +497,7 @@ void COLED::clearFusionInt()
     m_display.fillRect(0, OLED_LINE2, m_display.width(), m_display.height(), BLACK);
 
     m_display.setCursor(40,OLED_LINE4);
-    m_display.print("Listening");
+    m_display.print("Standby");
 
     m_display.setCursor(0,OLED_LINE6);
     m_display.printf("%s",m_ipaddress.c_str());
@@ -527,7 +527,7 @@ void COLED::clearP25Int()
     m_display.fillRect(0, OLED_LINE2, m_display.width(), m_display.height(), BLACK);
 
     m_display.setCursor(40,OLED_LINE4);
-    m_display.print("Listening");
+    m_display.print("Standby");
 
     m_display.setCursor(0,OLED_LINE6);
     m_display.printf("%s",m_ipaddress.c_str());
@@ -577,7 +577,7 @@ void COLED::clearNXDNInt()
     m_display.fillRect(0, OLED_LINE2, m_display.width(), m_display.height(), BLACK);
 
     m_display.setCursor(40,OLED_LINE3);
-    m_display.print("Listening");
+    m_display.print("Standby");
 
     m_display.setCursor(0,OLED_LINE6);
     m_display.printf("%s",m_ipaddress.c_str());
@@ -607,7 +607,7 @@ void COLED::clearM17Int()
     m_display.fillRect(0, OLED_LINE2, m_display.width(), m_display.height(), BLACK);
 
     m_display.setCursor(40,OLED_LINE4);
-    m_display.print("Listening");
+    m_display.print("Standby");
 
     m_display.setCursor(0,OLED_LINE6);
     m_display.printf("%s",m_ipaddress.c_str());
@@ -682,7 +682,7 @@ void COLED::clearPOCSAGInt()
     m_display.fillRect(0, OLED_LINE2, m_display.width(), m_display.height(), BLACK);
 
     m_display.setCursor(40,OLED_LINE3);
-    m_display.print("Listening");
+    m_display.print("Standby");
 
     m_display.setCursor(0,OLED_LINE6);
     m_display.printf("%s",m_ipaddress.c_str());
@@ -709,8 +709,10 @@ void COLED::clearCWInt()
     m_display.clearDisplay();
 
     m_display.setCursor(0,30);
-    m_display.setTextSize(3);
-    m_display.print("Idle");
+    m_display.setTextSize(2);
+    m_display.print("   W0CHP\n");
+    m_display.setTextSize(1);
+    m_display.print("      PiStar-Dash");
 
     m_display.setTextSize(1);
     m_display.display();
@@ -726,7 +728,7 @@ void COLED::close()
         m_display.startscrollleft(0x00,0x01);
     m_display.setCursor(0,00);
     m_display.setTextSize(2);
-    m_display.print("-CLOSE-");
+    m_display.print("-OFFLINE-");
     m_display.display();
 
     m_display.close();
