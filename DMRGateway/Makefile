@@ -2,7 +2,7 @@ CC      = cc
 CXX     = c++
 
 # Use the following CFLAGS and LIBS if you don't want to use gpsd.
-CFLAGS  = -g -O3 -Wall -DHAVE_LOG_H -std=c++0x -pthread
+CFLAGS  = -g -O3 -Wall -DHAVE_LOG_H -std=c++0x -pthread -DREMOTE_COMMAND_NO_LOG
 LIBS    = -lpthread
 
 # Use the following CFLAGS and LIBS if you do want to use gpsd.
