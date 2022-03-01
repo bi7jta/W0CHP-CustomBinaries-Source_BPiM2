@@ -2,7 +2,7 @@
 
 CC      = cc
 CXX     = c++
-CFLAGS  = -g -O3 -Wall -std=c++0x -pthread -DHAVE_LOG_H -DOLED -DHD44780 -I/usr/local/include
+CFLAGS  = -g -O3 -Wall -std=c++0x -pthread -DHAVE_LOG_H -DOLED -DHD44780 -DREMOTE_COMMAND_NO_LOG -I/usr/local/include
 LIBS    = -lwiringPi -lwiringPiDev -lArduiPi_OLED -lpthread -lutil
 
 # If you use NetBSD, add following CFLAGS
