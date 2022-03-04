@@ -113,7 +113,8 @@ bool CDMRTA::decodeTA()
     }
 
     size_t TAlen = ::strlen(m_TA);
-    LogMessage("DMR Talker Alias (Data Format %u, Received %u/%u char): '%s'", TAformat, TAlen, TAsize, m_TA);
+    //LogMessage("DMR Talker Alias (Data Format %u, Received %u/%u char): '%s'", TAformat, TAlen, TAsize, m_TA);
+    LogDebug("DMR Talker Alias (Data Format %u, Received %u/%u char): '%s'", TAformat, TAlen, TAsize, m_TA);
 
 	if (TAlen > TAsize) {
         if (TAlen < 29U)
