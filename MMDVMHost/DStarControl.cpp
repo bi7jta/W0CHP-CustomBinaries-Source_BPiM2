@@ -896,7 +896,7 @@ void CDStarControl::writeQueueHeaderRF(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogError("D-Star, overflow in the D-Star RF queue");
+		LogDebug("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -919,7 +919,7 @@ void CDStarControl::writeQueueDataRF(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogError("D-Star, overflow in the D-Star RF queue");
+		LogDebug("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -940,7 +940,7 @@ void CDStarControl::writeQueueEOTRF()
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogError("D-Star, overflow in the D-Star RF queue");
+		LogDebug("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -961,7 +961,7 @@ void CDStarControl::writeQueueHeaderNet(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogError("D-Star, overflow in the D-Star RF queue");
+		LogDebug("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -981,7 +981,7 @@ void CDStarControl::writeQueueDataNet(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogError("D-Star, overflow in the D-Star RF queue");
+		LogDebug("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -999,7 +999,7 @@ void CDStarControl::writeQueueEOTNet()
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogError("D-Star, overflow in the D-Star RF queue");
+		LogDebug("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 

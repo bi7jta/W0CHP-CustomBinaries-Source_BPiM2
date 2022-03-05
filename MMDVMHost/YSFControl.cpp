@@ -1084,7 +1084,7 @@ void CYSFControl::writeQueueRF(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogError("YSF, overflow in the System Fusion RF queue");
+		LogDebug("YSF, overflow in the System Fusion RF queue");
 		return;
 	}
 
@@ -1104,7 +1104,7 @@ void CYSFControl::writeQueueNet(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogError("YSF, overflow in the System Fusion RF queue");
+		LogDebug("YSF, overflow in the System Fusion RF queue");
 		return;
 	}
 
