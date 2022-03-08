@@ -244,7 +244,7 @@ bool COLED::open()
 
     OLED_statusbar();
     m_display.setCursor(0,OLED_LINE3);
-    m_display.print("Initializing...");
+    m_display.print("Initializing");
     m_display.display();
 
     return true;
@@ -325,7 +325,7 @@ void COLED::setQuitInt()
 
     m_display.setCursor(0,30);
     m_display.setTextSize(3);
-    m_display.print("Stopping...");
+    m_display.print("Stopping");
 
     m_display.setTextSize(1);
     m_display.display();
@@ -693,26 +693,15 @@ void COLED::clearPOCSAGInt()
 void COLED::writeCWInt()
 {
     m_display.clearDisplay();
-    m_display.fillRect(0, 0, m_display.width(), 16, BLACK);
-    if (m_displayScroll)
-        m_display.startscrollleft(0x00,0x01);
-    m_display.setCursor(0,00);
-    m_display.setTextSize(2);
-    m_display.print("CW ID TX... ");
-    m_display.display();
-
-/*
-    m_display.clearDisplay();
 
     m_display.setCursor(0,30);
-    m_display.setTextSize(3);
-    m_display.print("CW ID TX...");
+    m_display.setTextSize(2);
+    m_display.print("CW ID TX");
 
     m_display.setTextSize(1);
     m_display.display();
     if (m_displayScroll)
         m_display.startscrollleft(0x02,0x0f);
-*/
 }
 
 void COLED::clearCWInt()
