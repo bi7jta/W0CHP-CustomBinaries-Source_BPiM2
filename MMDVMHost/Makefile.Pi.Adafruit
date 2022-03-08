@@ -21,8 +21,8 @@ OBJECTS = \
 
 all:		MMDVMHost_Adafruit RemoteCommand
 
-MMDVMHost:	GitVersion.h $(OBJECTS) 
-		$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o MMDVMHost
+MMDVMHost_Adafruit:	GitVersion.h $(OBJECTS) 
+			$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o MMDVMHost_Adafruit
 
 RemoteCommand:	Log.o RemoteCommand.o UDPSocket.o
 		$(CXX) Log.o RemoteCommand.o UDPSocket.o $(CFLAGS) $(LIBS) -o RemoteCommand
@@ -32,7 +32,7 @@ RemoteCommand:	Log.o RemoteCommand.o UDPSocket.o
 
 .PHONY install:
 install: all
-		install -m 755 MMDVMHost /usr/local/bin/
+		install -m 755 MMDVMHost_Adafruit /usr/local/bin/
 		install -m 755 RemoteCommand /usr/local/bin/
 
 .PHONY install-service:
@@ -58,7 +58,7 @@ uninstall-service:
 		@rm -f /lib/systemd/system/mmdvmhost.service || true
 
 clean:
-		$(RM) MMDVMHost RemoteCommand *.o *.d *.bak *~ GitVersion.h
+		$(RM) MMDVMHost_Adafruit RemoteCommand *.o *.d *.bak *~ GitVersion.h
 
 GitVersion.h:
 		echo "const char *gitversion = \"$(shell git rev-parse HEAD)\";" > $@
