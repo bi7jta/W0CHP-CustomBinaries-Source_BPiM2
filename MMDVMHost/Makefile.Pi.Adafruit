@@ -19,7 +19,7 @@ OBJECTS = \
 		TFTSurenoo.o Thread.o Timer.o UARTController.o UDPController.o UDPSocket.o UserDB.o UserDBentry.o Utils.o YSFControl.o YSFConvolution.o YSFFICH.o \
 		YSFNetwork.o YSFPayload.o
 
-all:		MMDVMHost RemoteCommand
+all:		MMDVMHost_Adafruit RemoteCommand
 
 MMDVMHost:	GitVersion.h $(OBJECTS) 
 		$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o MMDVMHost
