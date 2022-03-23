@@ -59,7 +59,7 @@ void CDMRLookup::reload()
 
 void CDMRLookup::entry()
 {
-	LogInfo("Started the DMR Id lookup reload thread");
+	LogDebug("Started the DMR Id lookup reload thread");
 
 	CTimer timer(1U, 3600U * m_reloadTime);
 	timer.start();
