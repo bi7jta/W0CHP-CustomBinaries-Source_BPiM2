@@ -56,7 +56,7 @@ bool CUserDB::lookup(unsigned int id, class CUserDBentry *entry)
 
 bool CUserDB::load(std::string const& filename)
 {
-	LogInfo("Loading ID lookup table from %s", filename.c_str());
+	LogDebug("Loading ID lookup table from %s", filename.c_str());
 
 	FILE* fp = ::fopen(filename.c_str(), "rt");
 	if (fp == NULL) {

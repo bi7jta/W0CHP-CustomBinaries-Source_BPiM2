@@ -283,13 +283,13 @@ int CMMDVMHost::run()
 	}
 #endif
 
-	LogInfo(HEADER1);
-	LogInfo(HEADER2);
-	LogInfo(HEADER3);
-	LogInfo(HEADER4);
+	LogDebug(HEADER1);
+	LogDebug(HEADER2);
+	LogDebug(HEADER3);
+	LogDebug(HEADER4);
 
 	LogMessage("MMDVMHost-%s is starting", VERSION);
-	LogMessage("Built %s %s (GitID #%.7s)", __TIME__, __DATE__, gitversion);
+	LogDebug("Built %s %s (GitID #%.7s)", __TIME__, __DATE__, gitversion);
 
 	readParams();
 
