@@ -353,7 +353,7 @@ void CModem::setTransparentDataParams(unsigned int sendFrameType)
 
 bool CModem::open()
 {
-	::LogMessage("Opening the MMDVM");
+	::LogDebug("Opening the MMDVM");
 
 	bool ret = m_port->open();
 	if (!ret)
@@ -1156,7 +1156,7 @@ void CModem::close()
 {
 	assert(m_port != NULL);
 
-	::LogMessage("Closing the MMDVM");
+	::LogDebug("Closing the MMDVM");
 
 	m_port->close();
 }

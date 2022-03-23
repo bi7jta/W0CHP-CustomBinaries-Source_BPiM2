@@ -111,7 +111,7 @@ bool CP25Network::open()
 		return false;
 	}
 
-	LogMessage("Opening P25 network connection");
+	LogDebug("Opening P25 network connection");
 
 	return m_socket.open(m_addr);
 }
@@ -433,7 +433,7 @@ void CP25Network::close()
 {
 	m_socket.close();
 
-	LogMessage("Closing P25 network connection");
+	LogDebug("Closing P25 network connection");
 }
 
 void CP25Network::enable(bool enabled)

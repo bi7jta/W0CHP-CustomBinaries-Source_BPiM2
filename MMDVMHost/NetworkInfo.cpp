@@ -62,7 +62,7 @@ CNetworkInfo::~CNetworkInfo()
 
 void CNetworkInfo::getNetworkInterface(unsigned char* info)
 {
-	LogInfo("Interfaces Info");
+	LogDebug("Interfaces Info");
 
 	::strcpy((char*)info, "(address unknown)");
 
@@ -171,11 +171,11 @@ void CNetworkInfo::getNetworkInterface(unsigned char* info)
 
 			if (family == AF_INET) {
 				::sprintf(interfacelist[ifnr], "%s:%s", ifa->ifa_name, host);
-				LogInfo("    IPv4: %s", interfacelist[ifnr]);
+				LogDebug("    IPv4: %s", interfacelist[ifnr]);
 				ifnr++;
 			} else {
 				::sprintf(interfacelist[ifnr], "%s:%s", ifa->ifa_name, host);
-				LogInfo("    IPv6: %s", interfacelist[ifnr]);
+				LogDebug("    IPv6: %s", interfacelist[ifnr]);
 				// due to default routing is for IPv4, other
 				// protocols are not candidate to display.
 			}
@@ -184,7 +184,7 @@ void CNetworkInfo::getNetworkInterface(unsigned char* info)
 
 	::freeifaddrs(ifaddr);
 
-	LogInfo("    Default interface is : %s" , dflt);
+	LogDebug("    Default interface is : %s" , dflt);
 
 	for (unsigned int n = 0U; n < ifnr; n++) {
 		char* p = ::strchr(interfacelist[n], '%');
@@ -197,7 +197,7 @@ void CNetworkInfo::getNetworkInterface(unsigned char* info)
 		}
 	}
 
-	LogInfo("    IP to show: %s", info);
+	LogDebug("    IP to show: %s", info);
 #elif defined(_WIN32) || defined(_WIN64)
 	PMIB_IPFORWARDTABLE pIpForwardTable = (MIB_IPFORWARDTABLE *)::malloc(sizeof(MIB_IPFORWARDTABLE));
 	if (pIpForwardTable == NULL) {
@@ -263,7 +263,7 @@ void CNetworkInfo::getNetworkInterface(unsigned char* info)
 
 	PIP_ADAPTER_INFO pAdapter = pAdapterInfo;
 	while (pAdapter != NULL) {
-		LogInfo("    IP  : %s", pAdapter->IpAddressList.IpAddress.String);
+		LogDebug("    IP  : %s", pAdapter->IpAddressList.IpAddress.String);
 		if (pAdapter->Index == ifnr)
 			::strcpy((char*)info, pAdapter->IpAddressList.IpAddress.String);
 
@@ -272,6 +272,6 @@ void CNetworkInfo::getNetworkInterface(unsigned char* info)
 
 	::free(pAdapterInfo);
 
-	LogInfo("    IP to show: %s", info);
+	LogDebug("    IP to show: %s", info);
 #endif
 }

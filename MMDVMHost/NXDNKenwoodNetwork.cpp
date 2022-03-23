@@ -89,7 +89,7 @@ bool CNXDNKenwoodNetwork::open()
 		return false;
 	}
 
-	LogMessage("Opening Kenwood connection");
+	LogDebug("Opening Kenwood connection");
 
 	if (!m_rtcpSocket.open(m_rtcpAddr))
 		return false;
@@ -845,7 +845,7 @@ void CNXDNKenwoodNetwork::close()
 	m_rtcpSocket.close();
 	m_rtpSocket.close();
 
-	LogMessage("Closing Kenwood connection");
+	LogDebug("Closing Kenwood connection");
 }
 
 void CNXDNKenwoodNetwork::clock(unsigned int ms)

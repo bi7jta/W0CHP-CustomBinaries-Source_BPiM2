@@ -65,7 +65,7 @@ bool CFMNetwork::open()
 		return false;
 	}
 
-	LogMessage("Opening FM network connection");
+	LogDebug("Opening FM network connection");
 
 	return m_socket.open(m_addr);
 }
@@ -285,7 +285,7 @@ void CFMNetwork::close()
 {
 	m_socket.close();
 
-	LogMessage("Closing FM network connection");
+	LogDebug("Closing FM network connection");
 }
 
 void CFMNetwork::enable(bool enabled)

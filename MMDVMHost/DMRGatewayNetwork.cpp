@@ -109,7 +109,7 @@ bool CDMRGatewayNetwork::open()
 		return false;
 	}
 
-	LogMessage("DMR, Opening DMR Network");
+	LogDebug("DMR, Opening DMR Network");
 
 	bool ret = m_socket.open(m_addr);
 	if (ret)
@@ -294,7 +294,7 @@ bool CDMRGatewayNetwork::isConnected() const
 
 void CDMRGatewayNetwork::close(bool sayGoodbye)
 {
-	LogMessage("DMR, Closing DMR Network");
+	LogDebug("DMR, Closing DMR Network");
 
 	m_socket.close();
 }

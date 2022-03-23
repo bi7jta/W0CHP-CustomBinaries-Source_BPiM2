@@ -70,7 +70,7 @@ bool CDStarNetwork::open()
 		return false;
 	}
 
-	LogMessage("Opening D-Star network connection");
+	LogDebug("Opening D-Star network connection");
 
 	m_pollTimer.start();
 
@@ -324,7 +324,7 @@ void CDStarNetwork::close()
 {
 	m_socket.close();
 
-	LogMessage("Closing D-Star network connection");
+	LogDebug("Closing D-Star network connection");
 }
 
 void CDStarNetwork::enable(bool enabled)

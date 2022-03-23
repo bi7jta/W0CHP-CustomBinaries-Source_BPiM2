@@ -54,7 +54,7 @@ bool CNXDNIcomNetwork::open()
 		return false;
 	}
 
-	LogMessage("Opening NXDN network connection");
+	LogDebug("Opening NXDN network connection");
 
 	return m_socket.open(m_addr);
 }
@@ -162,7 +162,7 @@ void CNXDNIcomNetwork::close()
 {
 	m_socket.close();
 
-	LogMessage("Closing NXDN network connection");
+	LogDebug("Closing NXDN network connection");
 }
 
 void CNXDNIcomNetwork::enable(bool enabled)

@@ -96,7 +96,7 @@ bool CUserDB::load(std::string const& filename)
 	size_t size = m_table.size();
 	m_mutex.unlock();
 
-	LogInfo("Loaded %u IDs to lookup table - %s", size, filename.c_str());
+	LogDebug("Loaded %u IDs to lookup table - %s", size, filename.c_str());
 
 	return size != 0U;
 }

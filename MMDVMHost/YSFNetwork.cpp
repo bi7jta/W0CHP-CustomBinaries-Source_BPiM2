@@ -61,7 +61,7 @@ bool CYSFNetwork::open()
 		return false;
 	}
 
-	LogMessage("Opening YSF network connection");
+	LogDebug("Opening YSF network connection");
 
 	m_pollTimer.start();
 
@@ -192,7 +192,7 @@ void CYSFNetwork::close()
 {
 	m_socket.close();
 
-	LogMessage("Closing YSF network connection");
+	LogDebug("Closing YSF network connection");
 }
 
 void CYSFNetwork::enable(bool enabled)

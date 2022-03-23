@@ -51,7 +51,7 @@ bool CPOCSAGNetwork::open()
 		return false;
 	}
 
-	LogMessage("Opening POCSAG network connection");
+	LogDebug("Opening POCSAG network connection");
 
 	return m_socket.open();
 }
@@ -108,7 +108,7 @@ void CPOCSAGNetwork::close()
 {
 	m_socket.close();
 
-	LogMessage("Closing POCSAG network connection");
+	LogDebug("Closing POCSAG network connection");
 }
 
 void CPOCSAGNetwork::enable(bool enabled)
