@@ -1,6 +1,6 @@
 CC      = gcc
 CXX     = g++
-CFLAGS  = -g -O3 -Wall -std=c++0x -pthread -DHAVE_LOG_H
+CFLAGS  = -s -O3 -Wall -std=c++0x -pthread -DHAVE_LOG_H
 LIBS    = -lpthread
 LDFLAGS = -g
 

@@ -1,6 +1,6 @@
 CC      = cc
 CXX     = c++
-CFLAGS  = -g -O3 -Wall -std=c++0x -pthread
+CFLAGS  = -s -O3 -Wall -std=c++0x -pthread
 LIBS    = -lpthread
 LDFLAGS = -g
 
