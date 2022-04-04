@@ -1,6 +1,6 @@
 CC      ?= gcc
 CXX     ?= g++
-CFLAGS  ?= -g -O3 -Wall -std=c++0x -pthread
+CFLAGS  ?= -s -O3 -Wall -std=c++0x -pthread
 LIBS    = -lm -lmd380_vocoder
 LDFLAGS ?= -g
 

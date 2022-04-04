@@ -8,7 +8,7 @@ export BINDIR  ?= /usr/bin
 DEBUGFLAGS     := -g -D_DEBUG
 RELEASEFLAGS   := -DNDEBUG -DwxDEBUG_LEVEL=0
 export CXX     := $(shell wx-config --cxx)
-export CFLAGS  := -O2 -Wall $(shell wx-config --cxxflags) -DLOG_DIR='"$(LOGDIR)"' -DCONF_DIR='"$(CONFDIR)"' -DDATA_DIR='"$(DATADIR)"'
+export CFLAGS  := -s -O2 -Wall $(shell wx-config --cxxflags) -DLOG_DIR='"$(LOGDIR)"' -DCONF_DIR='"$(CONFDIR)"' -DDATA_DIR='"$(DATADIR)"'
 ifeq ($(BUILD), debug)
     export CFLAGS  := $(CFLAGS) $(DEBUGFLAGS)
 else ifeq ($(BUILD), release)
