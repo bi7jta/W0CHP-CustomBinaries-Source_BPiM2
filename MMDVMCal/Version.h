@@ -19,6 +19,6 @@
 #if !defined(VERSION_H)
 #define	VERSION_H
 
-#define VERSION "20211101_W0CHP"
+#define VERSION "20211101_W0CHP-PiStar-Dash"
 
 #endif
