@@ -15,7 +15,7 @@ P25Gateway:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 P25Gateway /usr/local/bin/
+		install -m 755 P25Gateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) P25Gateway *.o *.d *.bak *~

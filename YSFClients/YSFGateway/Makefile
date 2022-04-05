@@ -29,7 +29,7 @@ YSFGateway.o: GitVersion.h FORCE
 FORCE:
 
 install:
-		install -m 755 YSFGateway /usr/local/bin/
+		install -m 755 YSFGateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) YSFGateway *.o *.d *.bak *~ GitVersion.h

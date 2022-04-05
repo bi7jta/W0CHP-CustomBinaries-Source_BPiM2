@@ -21,7 +21,7 @@ APRSGateway.o: GitVersion.h FORCE
 FORCE:
 
 install:
-		install -m 755 APRSGateway /usr/local/bin/
+		install -m 755 APRSGateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) APRSGateway *.o *.d *.bak *~ GitVersion.h

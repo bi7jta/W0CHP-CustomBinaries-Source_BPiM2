@@ -19,7 +19,7 @@ M172DMR:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 M172DMR /usr/local/bin/
+		install -m 755 M172DMR $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) M172DMR *.o *.d *.bak *~

@@ -34,7 +34,7 @@ clean:
 		$(RM) DMRGateway *.o *.d *.bak *~ GitVersion.h
 
 install:
-		install -m 755 DMRGateway /usr/local/bin/
+		install -m 755 DMRGateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 # Export the current git version if the index file exists, else 000...
 GitVersion.h:

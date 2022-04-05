@@ -18,7 +18,7 @@ DMR2P25:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 DMR2P25 /usr/local/bin/
+		install -m 755 DMR2P25 $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) DMR2P25 *.o *.d *.bak *~

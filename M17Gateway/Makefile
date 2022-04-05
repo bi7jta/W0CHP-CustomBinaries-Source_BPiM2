@@ -32,7 +32,7 @@ clean:
 		$(RM) M17Gateway *.o *.d *.bak *~ GitVersion.h
 
 install:
-		install -m 755 M17Gateway /usr/local/bin/
+		install -m 755 M17Gateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 GitVersion.h:
 		echo "const char *gitversion = \"$(shell git rev-parse HEAD)\";" > $@

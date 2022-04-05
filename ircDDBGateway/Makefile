@@ -12,7 +12,7 @@ else
 export DATADIR ?= /usr/local/etc
 export LOGDIR  ?= /var/log/pi-star
 export CONFDIR ?= /etc
-export BINDIR  ?= /usr/local/bin/
+export BINDIR  ?= $(HOME)/dev/W0CHP-PiStar-bin/
 endif
 
 # Add -DDCS_LINK to the end of the CFLAGS line below to add DCS linking to StarNet
@@ -67,12 +67,13 @@ Common/Common.a: force
 ircDDB/IRCDDB.a: force
 	$(MAKE) -C ircDDB
 
-.PHONY: installdirs
-installdirs: force
-	/bin/mkdir -p $(DESTDIR)$(DATADIR) $(DESTDIR)$(LOGDIR) $(DESTDIR)$(CONFDIR) $(DESTDIR)$(BINDIR)
+#.PHONY: installdirs
+#installdirs: force
+#	/bin/mkdir -p $(DESTDIR)$(DATADIR) $(DESTDIR)$(LOGDIR) $(DESTDIR)$(CONFDIR) $(DESTDIR)$(BINDIR)
 
 .PHONY: install
-install: all installdirs
+install: all
+#install: all installdirs
 ifeq ($(TARGET), opendv)
 	useradd --user-group -M --system opendv --shell /bin/false || true
 
@@ -85,7 +86,7 @@ ifeq ($(TARGET), opendv)
 	mkdir /var/log/opendv || true
 	chown opendv:opendv /var/log/opendv
 endif
-	$(MAKE) -C Data install
+	#$(MAKE) -C Data install
 	$(MAKE) -C APRSTransmit install
 	$(MAKE) -C ircDDBGateway install
 	$(MAKE) -C RemoteControl install

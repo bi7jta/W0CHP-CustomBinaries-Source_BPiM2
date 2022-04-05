@@ -21,7 +21,7 @@ DAPNETGateway.o: GitVersion.h FORCE
 FORCE:
 
 install:
-		install -m 755 DAPNETGateway /usr/local/bin/
+		install -m 755 DAPNETGateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) DAPNETGateway *.o *.d *.bak *~ GitVersion.h

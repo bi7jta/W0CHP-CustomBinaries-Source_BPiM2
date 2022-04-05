@@ -21,7 +21,7 @@ YSFParrot.o: GitVersion.h FORCE
 FORCE:
 
 install:
-		install -m 755 YSFParrot /usr/local/bin/
+		install -m 755 YSFParrot $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) YSFParrot *.o *.d *.bak *~ GitVersion.h

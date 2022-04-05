@@ -16,7 +16,7 @@ USRP2M17:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 USRP2M17 /usr/local/bin/
+		install -m 755 USRP2M17 $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) USRP2M17 *.o *.d *.bak codec2/*.o *~

@@ -19,7 +19,7 @@ YSF2NXDN:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 YSF2NXDN /usr/local/bin/
+		install -m 755 YSF2NXDN $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) YSF2NXDN *.o *.d *.bak *~

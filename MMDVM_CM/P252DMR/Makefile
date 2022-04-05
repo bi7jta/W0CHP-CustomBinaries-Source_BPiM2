@@ -18,7 +18,7 @@ P252DMR:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 P252DMR /usr/local/bin/
+		install -m 755 P252DMR $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) P252DMR *.o *.d *.bak *~

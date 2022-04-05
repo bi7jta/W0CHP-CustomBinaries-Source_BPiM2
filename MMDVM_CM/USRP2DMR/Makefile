@@ -18,7 +18,7 @@ USRP2DMR:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 USRP2DMR /usr/local/bin/
+		install -m 755 USRP2DMR $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) USRP2DMR *.o *.d *.bak *~

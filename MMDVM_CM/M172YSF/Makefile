@@ -16,7 +16,7 @@ M172YSF:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 M172YSF /usr/local/bin/
+		install -m 755 M172YSF $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) M172YSF *.o *.d *.bak *~

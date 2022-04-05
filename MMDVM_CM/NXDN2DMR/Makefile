@@ -20,7 +20,7 @@ NXDN2DMR:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 NXDN2DMR /usr/local/bin/
+		install -m 755 NXDN2DMR $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) NXDN2DMR *.o *.d *.bak *~

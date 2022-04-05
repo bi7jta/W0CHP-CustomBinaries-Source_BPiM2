@@ -35,8 +35,8 @@ RemoteCommand:	Log.o RemoteCommand.o UDPSocket.o
 
 .PHONY install:
 install: all
-		install -m 755 MMDVMHost /usr/local/bin/
-		install -m 755 RemoteCommand /usr/local/bin/
+		install -m 755 MMDVMHost $(HOME)/dev/W0CHP-PiStar-bin/
+		install -m 755 RemoteCommand $(HOME)/dev/W0CHP-PiStar-bin/
 
 .PHONY install-service:
 install-service: install /etc/MMDVM.ini
@@ -57,7 +57,7 @@ install-service: install /etc/MMDVM.ini
 uninstall-service:
 		@systemctl stop mmdvmhost.service || true
 		@systemctl disable mmdvmhost.service || true
-		@rm -f /usr/local/bin/MMDVMHost || true
+		@rm -f $(HOME)/dev/W0CHP-PiStar-bin/MMDVMHost || true
 		@rm -f /lib/systemd/system/mmdvmhost.service || true
 
 clean:

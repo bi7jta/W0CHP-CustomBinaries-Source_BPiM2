@@ -30,7 +30,7 @@ DGIdGateway.o: GitVersion.h FORCE
 FORCE:
 
 install:
-		install -m 755 DGIdGateway /usr/local/bin/
+		install -m 755 DGIdGateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) DGIdGateway *.o *.d *.bak *~ GitVersion.h

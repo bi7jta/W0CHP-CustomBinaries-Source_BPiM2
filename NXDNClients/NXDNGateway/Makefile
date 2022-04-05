@@ -23,7 +23,7 @@ NXDNGateway:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 NXDNGateway /usr/local/bin/
+		install -m 755 NXDNGateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) NXDNGateway *.o *.d *.bak *~

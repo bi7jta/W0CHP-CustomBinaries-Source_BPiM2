@@ -20,7 +20,7 @@ YSF2DMR:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 YSF2DMR /usr/local/bin/
+		install -m 755 YSF2DMR $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) YSF2DMR *.o *.d *.bak *~
