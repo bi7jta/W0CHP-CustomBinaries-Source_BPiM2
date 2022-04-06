@@ -21,15 +21,10 @@ endif
 # Add -DUSE_GPSD to the end of the CFLAGS line to enable the use of gpsd, and add -lgps to
 # end of the LIBS line.
 
-DEBUGFLAGS     := -g -D_DEBUG
 RELEASEFLAGS   := -DNDEBUG -DwxDEBUG_LEVEL=0
 export CXX     := $(shell wx-config --cxx)
 export CFLAGS  := -s -O2 -Wall $(shell wx-config --cxxflags) -DLOG_DIR='"$(LOGDIR)"' -DCONF_DIR='"$(CONFDIR)"' -DDATA_DIR='"$(DATADIR)"'
-ifeq ($(BUILD), debug)
-	export CFLAGS  := $(CFLAGS) $(DEBUGFLAGS)
-else ifeq ($(BUILD), release)
-	export CFLAGS  := $(CFLAGS) $(RELEASEFLAGS)
-endif
+export CFLAGS  := $(CFLAGS) $(RELEASEFLAGS)
 export LIBS    := $(shell wx-config --libs base,net)
 export LDFLAGS := 
 
