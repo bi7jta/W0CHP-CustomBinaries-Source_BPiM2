@@ -18,8 +18,8 @@ DStarRepeater/dstarrepeaterd:	Common/Common.a force
 #DStarRepeaterConfig/dstarrepeaterconfig:	GUICommon/GUICommon.a Common/Common.a force
 #	$(MAKE) -C DStarRepeaterConfig
 
-GUICommon/GUICommon.a: force
-	$(MAKE) -C GUICommon
+#GUICommon/GUICommon.a: force
+	#$(MAKE) -C GUICommon
 
 Common/Common.a: force
 	$(MAKE) -C Common

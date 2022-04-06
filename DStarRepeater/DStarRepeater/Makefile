@@ -15,7 +15,7 @@ dstarrepeaterd:	$(OBJECTS) ../Common/Common.a
 		$(CXX) -MM -DwxUSE_GUI=0 $(CFLAGS) -I../Common $< > $*.d
 
 install:
-		install -g root -o root -m 0755 dstarrepeaterd $(DESTDIR)$(BINDIR)
+		install -m 0755 dstarrepeaterd $(DESTDIR)$(BINDIR)
 
 clean:
 		$(RM) dstarrepeaterd *.o *.d *.bak *~

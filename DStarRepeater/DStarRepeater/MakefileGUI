@@ -13,7 +13,7 @@ dstarrepeater:	$(OBJECTS) ../Common/Common.a ../GUICommon/GUICommon.a
 		$(CXX) -MM $(CFLAGS) -I../Common -I../GUICommon $< > $*.d
 
 install:
-		install -g root -o root -m 0755 dstarrepeater $(DESTDIR)$(BINDIR)
+		install  -m 0755 dstarrepeater $(DESTDIR)$(BINDIR)
 
 clean:
 		$(RM) dstarrepeater *.o *.d *.bak *~

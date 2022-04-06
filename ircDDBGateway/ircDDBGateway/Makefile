@@ -14,8 +14,8 @@ ircddbgatewayd:	$(OBJECTS) ../ircDDB/IRCDDB.a ../Common/Common.a
 
 .PHONY: install
 install:
-		install -g root -o root -m 0755 ircddbgatewayd $(DESTDIR)$(BINDIR)
-		cp ircddbgateway-emptyconfig $(DESTDIR)$(CONFDIR)/ircddbgateway
+		install -m 0755 ircddbgatewayd $(DESTDIR)$(BINDIR)
+		#cp ircddbgateway-emptyconfig $(DESTDIR)$(CONFDIR)/ircddbgateway
 ifeq ($(TARGET), opendv)
 		cp ../debian/ircddbgatewayd.ircddbgatewayd.service $(DESTDIR)/etc/systemd/system/ircddbgatewayd.service
 endif

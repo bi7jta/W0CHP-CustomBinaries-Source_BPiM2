@@ -20,3 +20,4 @@ cd $ROOT_DIR/NXDNClients ; make clean ; make -j4 ; make install ; make clean
 cd $ROOT_DIR/P25Clients ; make clean ; make -j4 ; make install ; make clean
 cd $ROOT_DIR/YSFClients ; make clean ; make -j4 ; make install ; make clean
 
+strip -v `find -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary' | sed 's/:.*//g'`
