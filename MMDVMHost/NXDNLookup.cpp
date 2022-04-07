@@ -59,7 +59,7 @@ void CNXDNLookup::reload()
 
 void CNXDNLookup::entry()
 {
-	LogInfo("Started the NXDN Id lookup reload thread");
+	LogDebug("Started the NXDN Id lookup reload thread");
 
 	CTimer timer(1U, 3600U * m_reloadTime);
 	timer.start();
@@ -75,7 +75,7 @@ void CNXDNLookup::entry()
 		}
 	}
 
-	LogInfo("Stopped the NXDN Id lookup reload thread");
+	LogDebug("Stopped the NXDN Id lookup reload thread");
 }
 
 void CNXDNLookup::stop()

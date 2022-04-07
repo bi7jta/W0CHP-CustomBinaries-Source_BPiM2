@@ -75,7 +75,7 @@ void CDMRLookup::entry()
 		}
 	}
 
-	LogInfo("Stopped the DMR Id lookup reload thread");
+	LogDebug("Stopped the DMR Id lookup reload thread");
 }
 
 void CDMRLookup::stop()
