@@ -20,7 +20,7 @@
 #if !defined(VERSION_H)
 #define	VERSION_H
 
-const char* VERSION = "20200503_W0CHP-PiStar-Dash";
+const char* VERSION = "20220416_W0CHP-PiStar-Dash";
 
 #endif
 
