@@ -344,22 +344,22 @@ void CAPRSWriter::sendIdFramesFixed()
 		wxString desc;
 		if (entry->getBand().Len() > 1U) {
 			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("Data %.5lfMHz"), entry->getFrequency());
+				desc.Printf(wxT("Data %.5lfMHz; ircDDBGateway"), entry->getFrequency());
 			else
 				desc = wxT("Data");
 		} else {
 			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("Voice %.5lfMHz %c%.4lfMHz"),
+				desc.Printf(wxT("Voice %.5lfMHz %c%.4lfMHz; ircDDBGateway"),
 						entry->getFrequency(),
 						entry->getOffset() < 0.0 ? wxT('-') : wxT('+'),
 						::fabs(entry->getOffset()));
 			else
-				desc = wxT("Voice");
+				desc = wxT("Voice; ircDDBGateway");
 		}
 
 		wxString band;
 		if (entry->getFrequency() >= 1200.0)
-			band = wxT("1.2GHx");
+			band = wxT("1.2GHz");
 		else if (entry->getFrequency() >= 420.0)
 			band = wxT("70cm");
 		else if (entry->getFrequency() >= 144.0)
