@@ -164,12 +164,12 @@ void CAPRSWriter::sendIdFrames()
 	char desc[200U];
 	if (m_txFrequency != 0U) {
 		float offset = float(int(m_rxFrequency) - int(m_txFrequency)) / 1000000.0F;
-		::sprintf(desc, "- https://w0chp.net/w0chp-pistar-dash/ %.5LfMHz %c%.4lfMHz%s%s",
+		::sprintf(desc, "%.5LfMHz %c%.4lfMHz%s%s",
 			(long double)(m_txFrequency) / 1000000.0F,
 			offset < 0.0F ? '-' : '+',
 			::fabs(offset), m_desc.empty() ? "" : "; ", m_desc.c_str());
 	} else {
-		::sprintf(desc, "- W0CHP-PiStar-Dash%s%s", m_desc.empty() ? "" : "; ", m_desc.c_str());
+		::sprintf(desc, "%s%s", m_desc.empty() ? "" : "; ", m_desc.c_str());
 	}
 
 	const char* band = "4m";
@@ -212,6 +212,8 @@ void CAPRSWriter::sendIdFrames()
 		lat, (m_latitude < 0.0F)  ? 'S' : 'N',
 		lon, (m_longitude < 0.0F) ? 'W' : 'E',
 		float(m_height) * 3.28F, band, desc);
+        ::sprintf(output, "%s>APDG03:>https://w0chp.net/w0chp-pistar-dash/\r\n",
+                m_callsign.c_str());
 
 	m_thread->write(output);
 

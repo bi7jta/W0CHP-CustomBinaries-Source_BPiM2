@@ -173,12 +173,12 @@ void CAPRSWriter::sendIdFrameFixed()
 	char desc[200U];
 	if (m_txFrequency != 0U) {
 		float offset = float(int(m_rxFrequency) - int(m_txFrequency)) / 1000000.0F;
-		::sprintf(desc, "%.5LfMHz %c%.4lfMHz%s%s - https://w0chp.net/w0chp-pistar-dash/",
+		::sprintf(desc, "%.5LfMHz %c%.4lfMHz%s%s",
 			(long double)(m_txFrequency) / 1000000.0F,
 			offset < 0.0F ? '-' : '+',
 			::fabs(offset), m_desc.empty() ? "" : "; ", m_desc.c_str());
 	} else {
-		::sprintf(desc, "%s%s - https://w0chp.net/w0chp-pistar-dash/", m_desc.empty() ? "" : "; ", m_desc.c_str());
+		::sprintf(desc, "%s%s", m_desc.empty() ? "" : "; ", m_desc.c_str());
 	}
 
 	const char* band = "4m";
@@ -266,12 +266,12 @@ void CAPRSWriter::sendIdFrameMobile()
 	char desc[200U];
 	if (m_txFrequency != 0U) {
 		float offset = float(int(m_rxFrequency) - int(m_txFrequency)) / 1000000.0F;
-		::sprintf(desc, "%.5LfMHz %c%.4lfMHz%s%s - https://w0chp.net/w0chp-pistar-dash/",
+		::sprintf(desc, "%.5LfMHz %c%.4lfMHz%s%s",
 			(long double)(m_txFrequency) / 1000000.0F,
 			offset < 0.0F ? '-' : '+',
 			::fabs(offset), m_desc.empty() ? "" : "; ", m_desc.c_str());
 	} else {
-		::sprintf(desc, "%s%s - https://w0chp.net/w0chp-pistar-dash/", m_desc.empty() ? "" : "; ", m_desc.c_str());
+		::sprintf(desc, "%s%s", m_desc.empty() ? "" : "; ", m_desc.c_str());
 	}
 
 	const char* band = "4m";
@@ -313,6 +313,8 @@ void CAPRSWriter::sendIdFrameMobile()
 		m_callsign.c_str(), server.c_str(),
 		lat, (rawLatitude < 0.0F)  ? 'S' : 'N',
 		lon, (rawLongitude < 0.0F) ? 'W' : 'E');
+        ::sprintf(output, "%s>APDG03:>https://w0chp.net/w0chp-pistar-dash/\r\n",
+                m_callsign.c_str());
 
 	if (bearingSet && velocitySet)
 		::sprintf(output + ::strlen(output), "%03.0f/%03.0f", rawBearing, rawVelocity * 0.539957F);
