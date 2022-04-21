@@ -422,13 +422,11 @@ void CAPRSWriter::sendIdFramesFixed()
 		m_aprsSocket.write((unsigned char*)ascii, (unsigned int)::strlen(ascii), m_aprsAddress, m_aprsPort);
 
 		if (entry->getBand().Len() == 1U) {
-			output.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cD%s%c&RNG%04.0lf/A=%06.0lf %s %s\r\n"),
+			output.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cD%s%c&RNG%04.0lf/A=%06.0lf %s %s\r\n%s>APDG02:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
 				entry->getCallsign().c_str(), entry->getBand().c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 				lat.c_str(), (entry->getLatitude() < 0.0F)  ? wxT('S') : wxT('N'),
 				lon.c_str(), (entry->getLongitude() < 0.0F) ? wxT('W') : wxT('E'),
-				entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str());
-			output.Printf(wxT("%s>APDG02:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
-				entry->getCallsign().c_str());
+				entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str(), entry->getCallsign().c_str());
 
 			::memset(ascii, 0x00, 300U);
 			for (unsigned int i = 0U; i < output.Len(); i++)
@@ -552,12 +550,12 @@ void CAPRSWriter::sendIdFramesMobile()
 		lon.Replace(wxT(","), wxT("."));
 
 		wxString output1;
-		output1.Printf(wxT("%s-S>APDG01,TCPIP*,qAC,%s-GS:;%-7s%-2s*%02d%02d%02dz%s%cD%s%ca/A=%06.0lf"),
+		output1.Printf(wxT("%s-S>APDG01,TCPIP*,qAC,%s-GS:;%-7s%-2s*%02d%02d%02dz%s%cD%s%ca/A=%06.0lf\r\n%s>APDG03:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
 			m_gateway.c_str(), m_gateway.c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 			tm->tm_mday, tm->tm_hour, tm->tm_min,
 			lat.c_str(), (rawLatitude < 0.0)  ? wxT('S') : wxT('N'),
 			lon.c_str(), (rawLongitude < 0.0) ? wxT('W') : wxT('E'),
-			rawAltitude * 3.28);
+			rawAltitude * 3.28, entry->getCallsign().c_str());
 
 		wxString output2;
 		if (bearingSet && velocitySet)
@@ -582,19 +580,16 @@ void CAPRSWriter::sendIdFramesMobile()
 
 		if (entry->getBand().Len() == 1U) {
 			if (altitudeSet)
-				output1.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cD%s%c&/A=%06.0lf"),
+				output1.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cD%s%c&/A=%06.0lf\r\n%s>APDG02:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
 					entry->getCallsign().c_str(), entry->getBand().c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 					lat.c_str(), (rawLatitude < 0.0)  ? wxT('S') : wxT('N'),
 					lon.c_str(), (rawLongitude < 0.0) ? wxT('W') : wxT('E'),
-					rawAltitude * 3.28);
-                        	output1.Printf(wxT("%s>APDG02:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
-                                	entry->getCallsign().c_str());
+					rawAltitude * 3.28, entry->getCallsign().c_str());
 			else
-				output1.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cD%s%c&"),
+				output1.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cD%s%c&\r\n%s>APDG02:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
 					entry->getCallsign().c_str(), entry->getBand().c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 					lat.c_str(), (rawLatitude < 0.0)  ? wxT('S') : wxT('N'),
-					lon.c_str(), (rawLongitude < 0.0) ? wxT('W') : wxT('E'));
-                        	output1.Printf(wxT("%s>APDG02:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
+					lon.c_str(), (rawLongitude < 0.0) ? wxT('W') : wxT('E'),
                                 	entry->getCallsign().c_str());
 
 			::memset(ascii, 0x00, 300U);

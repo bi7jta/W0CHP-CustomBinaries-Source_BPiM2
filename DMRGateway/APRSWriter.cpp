@@ -155,13 +155,12 @@ void CAPRSWriter::sendIdFrame()
 	else
 		server.append("S");
 
-	char output[500U];
-	::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cR%s%c&/A=%06.0f%s %s\r\n",
+	char output[1500U];
+	::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cR%s%c&/A=%06.0f%s %s\r\n%s>APDG03:>https://w0chp.net/w0chp-pistar-dash/\r\n",
 		m_callsign.c_str(), server.c_str(),
 		lat, (m_latitude < 0.0F)  ? 'S' : 'N',
 		lon, (m_longitude < 0.0F) ? 'W' : 'E',
-		float(m_height) * 3.28F, band, desc);
-	::sprintf(output, "%s>APDG03:>https://w0chp.net/w0chp-pistar-dash/\r\n",
+		float(m_height) * 3.28F, band, desc,
 		m_callsign.c_str());
 
 	if (m_debug)
