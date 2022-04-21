@@ -412,8 +412,8 @@ void CAPRSWriter::sendIdFramesFixed()
 			lon.c_str(), (entry->getLongitude() < 0.0F) ? wxT('W') : wxT('E'),
 			entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str(), entry->getCallsign().c_str());
 
-		char ascii[300U];
-		::memset(ascii, 0x00, 300U);
+		char ascii[1500U];
+		::memset(ascii, 0x00, 1500U);
 		for (unsigned int i = 0U; i < output.Len(); i++)
 			ascii[i] = output.GetChar(i);
 
@@ -428,7 +428,7 @@ void CAPRSWriter::sendIdFramesFixed()
 				lon.c_str(), (entry->getLongitude() < 0.0F) ? wxT('W') : wxT('E'),
 				entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str(), entry->getCallsign().c_str());
 
-			::memset(ascii, 0x00, 300U);
+			::memset(ascii, 0x00, 1500U);
 			for (unsigned int i = 0U; i < output.Len(); i++)
 				ascii[i] = output.GetChar(i);
 
@@ -564,8 +564,8 @@ void CAPRSWriter::sendIdFramesMobile()
 		wxString output3;
 		output3.Printf(wxT("RNG%04.0lf %s %s\r\n"), entry->getRange() * 0.6214, band.c_str(), desc.c_str());
 
-		char ascii[300U];
-		::memset(ascii, 0x00, 300U);
+		char ascii[1500U];
+		::memset(ascii, 0x00, 1500U);
 		unsigned int n = 0U;
 		for (unsigned int i = 0U; i < output1.Len(); i++, n++)
 			ascii[n] = output1.GetChar(i);
@@ -592,7 +592,7 @@ void CAPRSWriter::sendIdFramesMobile()
 					lon.c_str(), (rawLongitude < 0.0) ? wxT('W') : wxT('E'),
                                 	entry->getCallsign().c_str());
 
-			::memset(ascii, 0x00, 300U);
+			::memset(ascii, 0x00, 1500U);
 			unsigned int n = 0U;
 			for (unsigned int i = 0U; i < output1.Len(); i++, n++)
 				ascii[n] = output1.GetChar(i);
