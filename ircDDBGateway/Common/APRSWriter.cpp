@@ -359,9 +359,9 @@ void CAPRSWriter::sendIdFramesFixed()
 
 		wxString band;
 		if (entry->getFrequency() >= 1200.0)
-			band = wxT("1.2");
+			band = wxT("1.2GHx");
 		else if (entry->getFrequency() >= 420.0)
-			band = wxT("440");
+			band = wxT("70cm");
 		else if (entry->getFrequency() >= 144.0)
 			band = wxT("2m");
 		else if (entry->getFrequency() >= 50.0)
@@ -405,12 +405,12 @@ void CAPRSWriter::sendIdFramesFixed()
 		lon.Replace(wxT(","), wxT("."));
 
 		wxString output;
-		output.Printf(wxT("%s-S>APDG01,TCPIP*,qAC,%s-GS:;%-7s%-2s*%02d%02d%02dz%s%cD%s%caRNG%04.0lf/A=%06.0lf %s %s\r\n"),
+		output.Printf(wxT("%s-S>APDG01,TCPIP*,qAC,%s-GS:;%-7s%-2s*%02d%02d%02dz%s%cD%s%caRNG%04.0lf/A=%06.0lf %s %s\r\n%s>APDG01:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
 			m_gateway.c_str(), m_gateway.c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 			tm->tm_mday, tm->tm_hour, tm->tm_min,
 			lat.c_str(), (entry->getLatitude() < 0.0F)  ? wxT('S') : wxT('N'),
 			lon.c_str(), (entry->getLongitude() < 0.0F) ? wxT('W') : wxT('E'),
-			entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str());
+			entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str(), entry->getCallsign().c_str());
 
 		char ascii[300U];
 		::memset(ascii, 0x00, 300U);
@@ -550,7 +550,7 @@ void CAPRSWriter::sendIdFramesMobile()
 		lon.Replace(wxT(","), wxT("."));
 
 		wxString output1;
-		output1.Printf(wxT("%s-S>APDG01,TCPIP*,qAC,%s-GS:;%-7s%-2s*%02d%02d%02dz%s%cD%s%ca/A=%06.0lf\r\n%s>APDG03:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
+		output1.Printf(wxT("%s-S>APDG01,TCPIP*,qAC,%s-GS:;%-7s%-2s*%02d%02d%02dz%s%cD%s%ca/A=%06.0lf\r\n%s>APDG01:>https://w0chp.net/w0chp-pistar-dash/\r\n"),
 			m_gateway.c_str(), m_gateway.c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 			tm->tm_mday, tm->tm_hour, tm->tm_min,
 			lat.c_str(), (rawLatitude < 0.0)  ? wxT('S') : wxT('N'),
