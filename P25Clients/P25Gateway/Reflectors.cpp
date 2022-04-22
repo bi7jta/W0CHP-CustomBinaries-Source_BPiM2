@@ -92,7 +92,7 @@ bool CReflectors::load()
 					refl->m_addrLen = addrLen;
 					m_reflectors.push_back(refl);
 				} else {
-					LogWarning("Unable to resolve the address of %s", host.c_str());
+					LogDebug("Unable to resolve the address of %s", host.c_str());
 				}
 			}
 		}
@@ -127,7 +127,7 @@ bool CReflectors::load()
 						refl->m_addrLen = addrLen;
 						m_reflectors.push_back(refl);
 					} else {
-						LogWarning("Unable to resolve the address of %s", host.c_str());
+						LogDebug("Unable to resolve the address of %s", host.c_str());
 					}
 				}
 			}
@@ -151,7 +151,7 @@ bool CReflectors::load()
 			m_reflectors.push_back(refl);
 			LogInfo("Loaded P25 parrot (TG%u)", refl->m_id);
 		} else {
-			LogWarning("Unable to resolve the address of the Parrot");
+			LogDebug("Unable to resolve the address of the Parrot");
 		}
 	}
 	
@@ -167,7 +167,7 @@ bool CReflectors::load()
 			m_reflectors.push_back(refl);
 			LogInfo("Loaded P252DMR (TG%u)", refl->m_id);
 		} else {
-			LogWarning("Unable to resolve the address of P252DMR");
+			LogDebug("Unable to resolve the address of P252DMR");
 		}
 	}
 
