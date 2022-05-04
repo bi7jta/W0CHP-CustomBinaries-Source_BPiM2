@@ -21,5 +21,6 @@ cd $SRC_DIR/MMDVM_CM/NXDN2DMR ; make clean ; make -j5 ; make install ; make clea
 cd $SRC_DIR/NXDNClients ; make clean ; make -j5 ; make install ; make clean
 cd $SRC_DIR/P25Clients ; make clean ; make -j5 ; make install ; make clean
 cd $SRC_DIR/YSFClients ; make clean ; make -j5 ; make install ; make clean
+cd $SRC_DIR/NextionDriver ; make clean ; make -j5 ; make install ; make clean
 
 strip `find $DEST_DIR -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary' | sed 's/:.*//g'`
