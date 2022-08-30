@@ -11,5 +11,9 @@ all:		clean NextionDriver
 NextionDriver:
 		$(CC) $(SOURCE) $(CFLAGS) -o NextionDriver
 
+.PHONY install:
+install: all
+		install -m 755 NextionDriver $(HOME)/dev/W0CHP-PiStar-bin/
+
 clean:
 		$(RM) NextionDriver *.o *.d *.bak *~
