@@ -344,17 +344,17 @@ void CAPRSWriter::sendIdFramesFixed()
 		wxString desc;
 		if (entry->getBand().Len() > 1U) {
 			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("Data %.5lfMHz; W0CHP-PiStar-Dash - https://wpsd.w0chp.net/"), entry->getFrequency());
+				desc.Printf(wxT("Data %.5lfMHz; Pwrd. by W0CHP-PiStar-Dash https://wpsd.w0chp.net/"), entry->getFrequency());
 			else
-				desc = wxT("Data; W0CHP-PiStar-Dash - https://wpsd.w0chp.net/");
+				desc = wxT("Data; Pwrd. by W0CHP-PiStar-Dash https://wpsd.w0chp.net/");
 		} else {
 			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("Voice %.5lfMHz %c%.4lfMHz; W0CHP-PiStar-Dash - https://wpsd.w0chp.net/"),
+				desc.Printf(wxT("Voice %.5lfMHz %c%.4lfMHz; Pwrd. by W0CHP-PiStar-Dash https://wpsd.w0chp.net/"),
 						entry->getFrequency(),
 						entry->getOffset() < 0.0 ? wxT('-') : wxT('+'),
 						::fabs(entry->getOffset()));
 			else
-				desc = wxT("Voice; W0CHP-PiStar-Dash - https://wpsd.w0chp.net/");
+				desc = wxT("Voice; Pwrd. by W0CHP-PiStar-Dash https://wpsd.w0chp.net/");
 		}
 
 		wxString band;

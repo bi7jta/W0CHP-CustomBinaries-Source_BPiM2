@@ -216,7 +216,7 @@ void CAPRSWriter::sendIdFrameFixed()
 		server.append("S");
 
         char output[1500U];
-        ::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cR%s%c&/A=%06.0f%s %s\r\n%s>APDG03:>W0CHP-PiStar-Dash - https://wpsd.w0chp.net/\r\n",
+        ::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cR%s%c&/A=%06.0f%s %s\r\n%s>APDG03:>Pwrd. by W0CHP-PiStar-Dash https://wpsd.w0chp.net/\r\n",
                 m_callsign.c_str(), server.c_str(),
                 lat, (m_latitude < 0.0F)  ? 'S' : 'N',
                 lon, (m_longitude < 0.0F) ? 'W' : 'E',
@@ -310,7 +310,7 @@ void CAPRSWriter::sendIdFrameMobile()
 		server.append("S");
 
         char output[1500U];
-        ::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cD%s%c&\r\n%s>APDG03:>W0CHP-PiStar-Dash - https://wpsd.w0chp.net/\r\n",
+        ::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cD%s%c&\r\n%s>APDG03:>Pwrd. by W0CHP-PiStar-Dash https://wpsd.w0chp.net/\r\n",
                 m_callsign.c_str(), server.c_str(),
                 lat, (m_latitude < 0.0F)  ? 'S' : 'N',
                 lon, (m_longitude < 0.0F) ? 'W' : 'E',
