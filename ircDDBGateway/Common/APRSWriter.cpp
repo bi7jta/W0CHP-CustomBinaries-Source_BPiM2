@@ -580,13 +580,13 @@ void CAPRSWriter::sendIdFramesMobile()
 
 		if (entry->getBand().Len() == 1U) {
 			if (altitudeSet)
-				output1.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cD%s%c&/A=%06.0lf"),
+				output1.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cW%s%cW/A=%06.0lf"),
 					entry->getCallsign().c_str(), entry->getBand().c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 					lat.c_str(), (rawLatitude < 0.0)  ? wxT('S') : wxT('N'),
 					lon.c_str(), (rawLongitude < 0.0) ? wxT('W') : wxT('E'),
 					rawAltitude * 3.28);
 			else
-				output1.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cD%s%c&"),
+				output1.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cW%s%cW"),
 					entry->getCallsign().c_str(), entry->getBand().c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 					lat.c_str(), (rawLatitude < 0.0)  ? wxT('S') : wxT('N'),
 					lon.c_str(), (rawLongitude < 0.0) ? wxT('W') : wxT('E'));
