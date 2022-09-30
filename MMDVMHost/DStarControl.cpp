@@ -768,16 +768,19 @@ void CDStarControl::writeNetwork()
 		m_netNextFrameIsFastData = false;
 		m_netSkipDTMFBlankingFrames = 0U;
 
+		LINK_STATUS status = LS_NONE;
 		unsigned char my1[DSTAR_LONG_CALLSIGN_LENGTH];
 		unsigned char my2[DSTAR_SHORT_CALLSIGN_LENGTH];
 		unsigned char your[DSTAR_LONG_CALLSIGN_LENGTH];
+                unsigned char reflector[DSTAR_LONG_CALLSIGN_LENGTH];
 		m_netHeader.getMyCall1(my1);
 		m_netHeader.getMyCall2(my2);
 		m_netHeader.getYourCall(your);
+                m_network->getStatus(status, reflector);
 
 		// We've received the header and EOT haven't we?
 		m_netFrames += 2U;
-		LogMessage("D-Star, received network end of transmission from %8.8s/%4.4s to %8.8s, %.1f seconds, %u%% packet loss, BER: %.1f%%", my1, my2, your, float(m_netFrames) / 50.0F, (m_netLost * 100U) / m_netFrames, float(m_netErrs * 100U) / float(m_netBits));
+		LogMessage("D-Star, received network end of transmission from %8.8s/%4.4s to %8.8s via %8.8s, %.1f seconds, %u%% packet loss, BER: %.1f%%", my1, my2, your, reflector, float(m_netFrames) / 50.0F, (m_netLost * 100U) / m_netFrames, float(m_netErrs * 100U) / float(m_netBits));
 
 		writeEndNet();
 	} else if (type == TAG_DATA) {
