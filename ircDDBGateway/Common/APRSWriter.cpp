@@ -344,17 +344,17 @@ void CAPRSWriter::sendIdFramesFixed()
 		wxString desc;
 		if (entry->getBand().Len() > 1U) {
 			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("Data %.5lfMHz; Pwrd. by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)"), entry->getFrequency());
+				desc.Printf(wxT("Data %.5lfMHz; APRS for ircDDBGateway"), entry->getFrequency());
 			else
-				desc = wxT("Data; Pwrd. by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)");
+				desc = wxT("Data; APRS for ircDDBGateway");
 		} else {
-			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("Voice %.5lfMHz %c%.4lfMHz; Pwrd. by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)"),
-						entry->getFrequency(),
-						entry->getOffset() < 0.0 ? wxT('-') : wxT('+'),
-						::fabs(entry->getOffset()));
+                        if (entry->getFrequency() != 0.0)
+                                desc.Printf(wxT("Voice %.5lfMHz %c%.4lfMHz; APRS for ircDDBGateway"),
+                                                entry->getFrequency(),
+                                                entry->getOffset() < 0.0 ? wxT('-') : wxT('+'),
+                                                ::fabs(entry->getOffset()));
 			else
-				desc = wxT("Voice; Pwrd. by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)");
+				desc = wxT("Voice; APRS for ircDDBGateway");
 		}
 
 		wxString band;
@@ -405,12 +405,13 @@ void CAPRSWriter::sendIdFramesFixed()
 		lon.Replace(wxT(","), wxT("."));
 
 		wxString output;
-		output.Printf(wxT("%s-S>APDG01,TCPIP*,qAC,%s-GS:;%-7s%-2s*%02d%02d%02dz%s%cW%s%cWRNG%04.0lf/A=%06.0lf %s %s\r\n"),
+		output.Printf(wxT("%s-S>APDG01,TCPIP*,qAC,%s-GS:;%-7s%-2s*%02d%02d%02dz%s%cW%s%cWRNG%04.0lf/A=%06.0lf %s %s\r\n%s-S>APDG01:>Pwrd. by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n"),
 			m_gateway.c_str(), m_gateway.c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 			tm->tm_mday, tm->tm_hour, tm->tm_min,
 			lat.c_str(), (entry->getLatitude() < 0.0F)  ? wxT('S') : wxT('N'),
 			lon.c_str(), (entry->getLongitude() < 0.0F) ? wxT('W') : wxT('E'),
-			entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str());
+			entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str(),
+			entry->getCallsign().c_str());
 
 		char ascii[300U];
 		::memset(ascii, 0x00, 300U);
@@ -422,11 +423,12 @@ void CAPRSWriter::sendIdFramesFixed()
 		m_aprsSocket.write((unsigned char*)ascii, (unsigned int)::strlen(ascii), m_aprsAddress, m_aprsPort);
 
 		if (entry->getBand().Len() == 1U) {
-			output.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cW%s%cWRNG%04.0lf/A=%06.0lf %s %s\r\n"),
+			output.Printf(wxT("%s-%s>APDG02,TCPIP*,qAC,%s-%sS:!%s%cW%s%cWRNG%04.0lf/A=%06.0lf %s %s\r\n%s-%s>APDG02:>Pwrd. by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n"),
 				entry->getCallsign().c_str(), entry->getBand().c_str(), entry->getCallsign().c_str(), entry->getBand().c_str(),
 				lat.c_str(), (entry->getLatitude() < 0.0F)  ? wxT('S') : wxT('N'),
 				lon.c_str(), (entry->getLongitude() < 0.0F) ? wxT('W') : wxT('E'),
-				entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str());
+				entry->getRange() * 0.6214, entry->getAGL() * 3.28, band.c_str(), desc.c_str(),
+				entry->getCallsign().c_str(), entry->getBand().c_str());
 
 			::memset(ascii, 0x00, 300U);
 			for (unsigned int i = 0U; i < output.Len(); i++)
@@ -562,7 +564,7 @@ void CAPRSWriter::sendIdFramesMobile()
 			output2.Printf(wxT("%03.0lf/%03.0lf"), rawBearing, rawVelocity * 0.539957F);
 
 		wxString output3;
-		output3.Printf(wxT("RNG%04.0lf %s %s\r\n"), entry->getRange() * 0.6214, band.c_str(), desc.c_str());
+		output3.Printf(wxT("RNG%04.0lf %s %s\r\n%s-%s>APDG01:>Pwrd. by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n"), entry->getRange() * 0.6214, band.c_str(), desc.c_str(), entry->getCallsign().c_str(), m_gateway.c_str());
 
 		char ascii[300U];
 		::memset(ascii, 0x00, 300U);
