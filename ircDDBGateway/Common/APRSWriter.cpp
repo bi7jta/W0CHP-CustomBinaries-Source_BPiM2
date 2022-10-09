@@ -508,7 +508,7 @@ void CAPRSWriter::sendIdFramesMobile()
 		if (entry->getFrequency() >= 1200.0)
 			band = wxT("23cm/1.2GHz");
 		else if (entry->getFrequency() >= 420.0)
-			band = wxT("440");
+			band = wxT("70cm");
 		else if (entry->getFrequency() >= 144.0)
 			band = wxT("2m");
 		else if (entry->getFrequency() >= 50.0)
