@@ -174,7 +174,7 @@ void CAPRSWriter::sendIdFrames()
 
 	const char* band = "4m";
 	if (m_txFrequency >= 1200000000U)
-		band = "1.2GHz";
+		band = "23cm/1.2GHz";
 	else if (m_txFrequency >= 420000000U)
 		band = "70cm";
 	else if (m_txFrequency >= 144000000U)

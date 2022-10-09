@@ -359,7 +359,7 @@ void CAPRSWriter::sendIdFramesFixed()
 
 		wxString band;
 		if (entry->getFrequency() >= 1200.0)
-			band = wxT("1.2GHz");
+			band = wxT("23cm/1.2GHz");
 		else if (entry->getFrequency() >= 420.0)
 			band = wxT("70cm");
 		else if (entry->getFrequency() >= 144.0)
@@ -506,7 +506,7 @@ void CAPRSWriter::sendIdFramesMobile()
 
 		wxString band;
 		if (entry->getFrequency() >= 1200.0)
-			band = wxT("1.2GHz");
+			band = wxT("23cm/1.2GHz");
 		else if (entry->getFrequency() >= 420.0)
 			band = wxT("440");
 		else if (entry->getFrequency() >= 144.0)
