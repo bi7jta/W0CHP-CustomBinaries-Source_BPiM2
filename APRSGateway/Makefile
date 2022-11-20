@@ -1,6 +1,6 @@
 CC      = gcc
 CXX     = g++
-CFLAGS  = -s -O3 -Wall -std=c++0x -pthread -DHAVE_LOG_H
+CFLAGS  = -g -O3 -Wall -std=c++0x -pthread -DHAVE_LOG_H
 LIBS    = -lpthread
 LDFLAGS = -g
 
@@ -8,7 +8,7 @@ OBJECTS = APRSGateway.o APRSWriterThread.o Conf.o Log.o StopWatch.o TCPSocket.o 
 
 all:		APRSGateway
 
-APRSGateway:	GitVersion.h $(OBJECTS)
+APRSGateway:	$(OBJECTS)
 		$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o APRSGateway
 
 %.o: %.cpp
@@ -20,11 +20,17 @@ APRSGateway.o: GitVersion.h FORCE
 
 FORCE:
 
+
 install:
-		install -m 755 APRSGateway $(HOME)/dev/W0CHP-PiStar-bin/
+		install -m 755 APRSGateway /usr/local/bin/
 
 clean:
 		$(RM) APRSGateway *.o *.d *.bak *~ GitVersion.h
- 
+
+# Export the current git version if the index file exists, else 000...
 GitVersion.h:
-		echo "const char *gitversion = \"$(shell git rev-parse HEAD)\";" > $@
+ifneq ("$(wildcard .git/index)","")
+	echo "const char *gitversion = \"$(shell git rev-parse HEAD)\";" > $@
+else
+	echo "const char *gitversion = \"0000000000000000000000000000000000000000\";" > $@
+endif
