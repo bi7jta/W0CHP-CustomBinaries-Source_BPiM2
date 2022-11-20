@@ -8,7 +8,7 @@ OBJECTS = APRSGateway.o APRSWriterThread.o Conf.o Log.o StopWatch.o TCPSocket.o 
 
 all:		APRSGateway
 
-APRSGateway:	$(OBJECTS)
+APRSGateway:	GitVersion.h $(OBJECTS)
 		$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o APRSGateway
 
 %.o: %.cpp
@@ -22,7 +22,7 @@ FORCE:
 
 
 install:
-		install -m 755 APRSGateway /usr/local/bin/
+		install -m 755 APRSGateway $(HOME)/dev/W0CHP-PiStar-bin/
 
 clean:
 		$(RM) APRSGateway *.o *.d *.bak *~ GitVersion.h
