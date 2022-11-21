@@ -257,12 +257,20 @@ void COLED::setIdleInt()
     m_display.clearDisplay();
     OLED_statusbar();
 
+//    m_display.setCursor(0,30);
+//    m_display.setTextSize(3);
+//    m_display.print("Idle");
+
+//    m_display.setTextSize(1);
+
+/*
     m_display.setCursor(0,OLED_LINE3);
     m_display.setTextSize(1);
     m_display.print("W0CHP-PiStar-Dash");
     m_display.setCursor(0,OLED_LINE5);
     m_display.setTextSize(1);
     m_display.print("-IDLE-");
+*/
 
     if (m_displayScroll && m_displayLogoScreensaver)
         m_display.startscrolldiagleft(0x00,0x0f);  //the MMDVM logo scrolls the whole screen
