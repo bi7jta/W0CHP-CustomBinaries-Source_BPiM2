@@ -357,7 +357,7 @@ void CPOCSAGControl::clock(unsigned int ms)
 	m_frames++;
 
 	if (m_state == PS_ENDING) {
-		LogMessage("POCSAG, transmitted %u frame(s) of data from %u message(s)", m_frames, m_count);
+		LogDebug("POCSAG, transmitted %u frame(s) of data from %u message(s)", m_frames, m_count);
 		m_display->clearPOCSAG();
 		m_state = PS_NONE;
 
