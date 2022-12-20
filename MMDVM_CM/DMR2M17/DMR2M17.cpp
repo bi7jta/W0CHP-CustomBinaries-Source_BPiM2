@@ -298,6 +298,7 @@ int CDMR2M17::run()
 
 	if (m_killed) {
 		m_dmrNetwork->close();
+		LogMessage("Closing DMR network connection");
 		delete m_dmrNetwork;
 		return 0;
 	}
@@ -340,7 +341,8 @@ int CDMR2M17::run()
 		unsigned int ms = stopWatch.elapsed();
 		
 		if(m17PingWatch.elapsed() > M17_PING_TIMEOUT){
-			LogMessage("M17 reflector stopped responding, sending CONN...");
+			LogMessage("Link lost to reflector %s; sending CONN...", m_m17Ref.c_str());
+			/*LogMessage("M17 reflector stopped responding, sending CONN...");*/
 			pollTimer.stop();
 			m17PingWatch.start();
 			m_m17Network->writeLink(module);
@@ -397,20 +399,27 @@ int CDMR2M17::run()
 
 		while (m_m17Network->readData(m_m17Frame, 54U) > 0U) {
 			if (!memcmp(m_m17Frame, "PING", 4)) {
+				LogDebug("Received PING from reflector  %s", m_m17Ref.c_str());
 				m17PingWatch.start();
 			}
 			if (!memcmp(m_m17Frame, "ACKN", 4)) {
-				LogMessage("Received ACKN from reflector");
+				LogMessage("Linked to reflector %s", m_m17Ref.c_str());
 				if(!pollTimer.isRunning()){
 					pollTimer.start();
 				}
 				m17PingWatch.start();
 			}
 			if (!memcmp(m_m17Frame, "NACK", 4)) {
-				LogMessage("Received NACK from reflector");
+				LogMessage("Link refused by reflector %s", m_m17Ref.c_str());
 				pollTimer.stop();
 				m17PingWatch.start();
 			}
+			if (!memcmp(m_m17Frame, "DISC", 4)) {
+				LogMessage("Unlinked from reflector %s", m_m17Ref.c_str());
+				pollTimer.stop();
+				m17PingWatch.start();
+			}
+
 			if (!memcmp(m_m17Frame, "M17 ", 4)) {
 				if (m_m17Frame[34] == 0 && m_m17Frame[35] == 0) {
 					m_m17Frames = 0;
@@ -681,8 +690,8 @@ int CDMR2M17::run()
 
 		if (ms < 5U) CThread::sleep(5U);
 	}
-
 	m_m17Network->close();
+	LogMessage("Closing DMR network connection");
 	m_dmrNetwork->close();
 	delete m_dmrNetwork;
 	delete m_m17Network;
