@@ -342,7 +342,6 @@ int CDMR2M17::run()
 		
 		if(m17PingWatch.elapsed() > M17_PING_TIMEOUT){
 			LogMessage("Link lost to reflector %s; sending CONN...", m_m17Ref.c_str());
-			/*LogMessage("M17 reflector stopped responding, sending CONN...");*/
 			pollTimer.stop();
 			m17PingWatch.start();
 			m_m17Network->writeLink(module);
