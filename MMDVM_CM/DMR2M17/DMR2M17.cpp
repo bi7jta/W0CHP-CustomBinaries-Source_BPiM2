@@ -253,7 +253,7 @@ int CDMR2M17::run()
 	
 	m_callsign = m_conf.getCallsign();
 	m_m17Ref = m_conf.getM17DstName();
-	char module = m_m17Ref.c_str()[m_m17Ref.find(' ')+1];
+	char module = m_m17Ref.c_str()[m_m17Ref.find('_')+1];
 
 	std::string m17_dstAddress   = m_conf.getM17DstAddress();
 	unsigned int m17_dstPort     = m_conf.getM17DstPort();

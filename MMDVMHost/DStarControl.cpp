@@ -1,5 +1,5 @@
 /*
- *	Copyright (C) 2015-2019,2021 Jonathan Naylor, G4KLX
+ *	Copyright (C) 2015-2019,2021,2023 Jonathan Naylor, G4KLX
  *
  *	This program is free software; you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -640,6 +640,8 @@ void CDStarControl::writeEndRF()
 {
 	m_rfState = RS_RF_LISTENING;
 
+	m_rfTimeoutTimer.stop();
+
 	if (m_netState == RS_NET_IDLE) {
 		m_display->clearDStar();
 
@@ -647,8 +649,6 @@ void CDStarControl::writeEndRF()
 
 		if (m_network != NULL)
 			m_network->reset();
-	} else {
-		m_rfTimeoutTimer.stop();
 	}
 }
 
@@ -768,19 +768,16 @@ void CDStarControl::writeNetwork()
 		m_netNextFrameIsFastData = false;
 		m_netSkipDTMFBlankingFrames = 0U;
 
-		LINK_STATUS status = LS_NONE;
 		unsigned char my1[DSTAR_LONG_CALLSIGN_LENGTH];
 		unsigned char my2[DSTAR_SHORT_CALLSIGN_LENGTH];
 		unsigned char your[DSTAR_LONG_CALLSIGN_LENGTH];
-                unsigned char reflector[DSTAR_LONG_CALLSIGN_LENGTH];
 		m_netHeader.getMyCall1(my1);
 		m_netHeader.getMyCall2(my2);
 		m_netHeader.getYourCall(your);
-                m_network->getStatus(status, reflector);
 
 		// We've received the header and EOT haven't we?
 		m_netFrames += 2U;
-		LogMessage("D-Star, received network end of transmission from %8.8s/%4.4s to %8.8s via %8.8s, %.1f seconds, %u%% packet loss, BER: %.1f%%", my1, my2, your, reflector, float(m_netFrames) / 50.0F, (m_netLost * 100U) / m_netFrames, float(m_netErrs * 100U) / float(m_netBits));
+		LogMessage("D-Star, received network end of transmission from %8.8s/%4.4s to %8.8s, %.1f seconds, %u%% packet loss, BER: %.1f%%", my1, my2, your, float(m_netFrames) / 50.0F, (m_netLost * 100U) / m_netFrames, float(m_netErrs * 100U) / float(m_netBits));
 
 		writeEndNet();
 	} else if (type == TAG_DATA) {
@@ -899,7 +896,7 @@ void CDStarControl::writeQueueHeaderRF(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogDebug("D-Star, overflow in the D-Star RF queue");
+		LogError("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -922,7 +919,7 @@ void CDStarControl::writeQueueDataRF(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogDebug("D-Star, overflow in the D-Star RF queue");
+		LogError("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -943,7 +940,7 @@ void CDStarControl::writeQueueEOTRF()
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogDebug("D-Star, overflow in the D-Star RF queue");
+		LogError("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -964,7 +961,7 @@ void CDStarControl::writeQueueHeaderNet(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogDebug("D-Star, overflow in the D-Star RF queue");
+		LogError("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -984,7 +981,7 @@ void CDStarControl::writeQueueDataNet(const unsigned char *data)
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogDebug("D-Star, overflow in the D-Star RF queue");
+		LogError("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
@@ -1002,7 +999,7 @@ void CDStarControl::writeQueueEOTNet()
 
 	unsigned int space = m_queue.freeSpace();
 	if (space < (len + 1U)) {
-		LogDebug("D-Star, overflow in the D-Star RF queue");
+		LogError("D-Star, overflow in the D-Star RF queue");
 		return;
 	}
 
