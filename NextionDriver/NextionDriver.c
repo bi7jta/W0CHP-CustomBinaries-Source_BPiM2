@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2017...2021 by Lieven De Samblanx ON7LDS
+ *   Copyright (C) 2017...2023 by Lieven De Samblanx ON7LDS
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -767,7 +767,7 @@ int main(int argc, char *argv[])
                 break;
             case 'V':
                 printf("\nNextionDriver version %s\n", NextionDriver_VERSION);
-                printf("Copyright (C) 2017...2021 ON7LDS. All rights reserved.\n\n");
+                printf("Copyright (C) 2017...2023 ON7LDS. All rights reserved.\n\n");
                 return 0;
                 break;
             case 'v':
@@ -796,7 +796,7 @@ int main(int argc, char *argv[])
             case 'h':
             case ':':
                 printf("\nNextionDriver version %s\n", NextionDriver_VERSION);
-                printf("Copyright (C) 2017...2021 ON7LDS. All rights reserved.\n");
+                printf("Copyright (C) 2017...2023 ON7LDS. All rights reserved.\n");
                 printf("\nUsage: %s -c <MMDVM config file> [-f] [-d] [-h]\n\n", argv[0]);
                 printf("  -c\tspecify the MMDVM config file, which might be extended with the NetxtionDriver config\n");
                 printf("  -C\tspecify a second config file, which might have the NetxtionDriver config\n");
@@ -818,7 +818,7 @@ int main(int argc, char *argv[])
     } else printf("Starting in console mode...\n");
 
     writelog(2,"NextionDriver version %s", NextionDriver_VERSION);
-    writelog(2,"Copyright (C) 2017...2021 ON7LDS. All rights reserved.");
+    writelog(2,"Copyright (C) 2017...2023 ON7LDS. All rights reserved.");
 
     writelog(2,"Starting with verbose level %d", verbose);
 
