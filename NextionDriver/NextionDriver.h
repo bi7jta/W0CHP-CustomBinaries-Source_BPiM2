@@ -19,7 +19,7 @@
 #if !defined(NextionDriver_H)
 #define NextionDriver_H
 
-#define NextionDriver_VERSION "1.25"
+#define NextionDriver_VERSION "1.26_W0CHP-PiStar-Dash"
 
 #define TRUE	1
 #define FALSE	0
@@ -31,7 +31,7 @@
 #define CONFIGFILE			"/etc/MMDVM.ini"
 #define CONFIGFILE_NEXTIONDRIVER	"/etc/NextionDriver.ini"
 #define GROUPSFILE			"groups.txt"
-#define GROUPSFILESRC			"https://api.brandmeister.network/v1.0/groups/"
+#define GROUPSFILESRC			"https://api.brandmeister.network/v2/talkgroup"
 #define USERSFILE			"users.csv"
 #define USERSFILESRC			"https://www.radioid.net/static/user.csv"
 #define MAXGROUPS	2500
