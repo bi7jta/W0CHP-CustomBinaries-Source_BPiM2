@@ -138,7 +138,6 @@ void CM17Network::clock(unsigned int ms)
 	}
 
 	if (m_state == M17N_NOTLINKED)
-
 		return;
 
 	unsigned char buffer[BUFFER_LENGTH];
