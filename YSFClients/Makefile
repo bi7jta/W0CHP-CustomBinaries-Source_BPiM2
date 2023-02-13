@@ -1,4 +1,4 @@
-SUBDIRS = DGIdGateway YSFGateway YSFParrot
+SUBDIRS = DGIdGateway YSFGateway YSFParrot YSFReflector
 CLEANDIRS = $(SUBDIRS:%=clean-%)
 INSTALLDIRS = $(SUBDIRS:%=install-%)
 

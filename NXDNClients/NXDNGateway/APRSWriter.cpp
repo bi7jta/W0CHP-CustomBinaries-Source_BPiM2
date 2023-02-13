@@ -34,6 +34,7 @@ m_latitude(0.0F),
 m_longitude(0.0F),
 m_height(0),
 m_desc(),
+m_symbol(),
 m_aprsAddr(),
 m_aprsAddrLen(0U),
 m_aprsSocket()
@@ -61,11 +62,12 @@ CAPRSWriter::~CAPRSWriter()
 {
 }
 
-void CAPRSWriter::setInfo(unsigned int txFrequency, unsigned int rxFrequency, const std::string& desc)
+void CAPRSWriter::setInfo(unsigned int txFrequency, unsigned int rxFrequency, const std::string& desc, const std::string& symbol)
 {
 	m_txFrequency = txFrequency;
 	m_rxFrequency = rxFrequency;
 	m_desc        = desc;
+	m_symbol      = symbol;
 }
 
 void CAPRSWriter::setStaticLocation(float latitude, float longitude, int height)
@@ -176,22 +178,22 @@ void CAPRSWriter::sendIdFrameFixed()
 		::sprintf(desc, "MMDVM Voice %.5LfMHz %c%.4lfMHz%s%s",
 			(long double)(m_txFrequency) / 1000000.0F,
 			offset < 0.0F ? '-' : '+',
-			::fabs(offset), m_desc.empty() ? "" : "; ", m_desc.c_str());
+			::fabs(offset), m_desc.empty() ? "" : ", ", m_desc.c_str());
 	} else {
-		::sprintf(desc, "MMDVM Voice%s%s", m_desc.empty() ? "" : "; ", m_desc.c_str());
+		::sprintf(desc, "MMDVM Voice%s%s", m_desc.empty() ? "" : ", ", m_desc.c_str());
 	}
 
-	const char* band = "4m";
-	if (m_txFrequency >= 1200000000U)
-		band = "23cm/1.2GHz";
-	else if (m_txFrequency >= 420000000U)
-		band = "70cm";
-	else if (m_txFrequency >= 144000000U)
-		band = "2m";
-	else if (m_txFrequency >= 50000000U)
-		band = "6m";
-	else if (m_txFrequency >= 28000000U)
-		band = "10m";
+        const char* band = "4m";
+        if (m_txFrequency >= 1200000000U)
+                band = "23cm/1.2GHz";
+        else if (m_txFrequency >= 420000000U)
+                band = "70cm";
+        else if (m_txFrequency >= 144000000U)
+                band = "2m";
+        else if (m_txFrequency >= 50000000U)
+                band = "6m";
+        else if (m_txFrequency >= 28000000U)
+                band = "10m";
 
 	double tempLat  = ::fabs(m_latitude);
 	double tempLong = ::fabs(m_longitude);
@@ -209,19 +211,22 @@ void CAPRSWriter::sendIdFrameFixed()
 	::sprintf(lon, "%08.2lf", longitude);
 
 	std::string server = m_callsign;
+	std::string symbol = m_symbol;
 	size_t pos = server.find_first_of('-');
 	if (pos == std::string::npos)
 		server.append("-S");
 	else
 		server.append("S");
 
-        char output[1500U];
-        ::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cW%s%ci/A=%06.0f%s %s\r\n%s>APDG03:>Powered by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n",                                               
-                m_callsign.c_str(), server.c_str(),
-                lat, (m_latitude < 0.0F)  ? 'S' : 'N',
-                lon, (m_longitude < 0.0F) ? 'W' : 'E',
-                float(m_height) * 3.28F, band, desc,
-                m_callsign.c_str());
+        if (symbol.empty())
+                symbol.append("D&");
+
+	char output[1000U];
+	::sprintf(output, "%s>APDG04,TCPIP*,qAC,%s:!%s%c%c%s%c%c/A=%06.0f%s %s\r\n%s>APDG03:>Powered by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n",
+		m_callsign.c_str(), server.c_str(),
+		lat, (m_latitude < 0.0F)  ? 'S' : 'N', symbol[0],
+		lon, (m_longitude < 0.0F) ? 'W' : 'E', symbol[1],
+		float(m_height) * 3.28F, band, desc, m_callsign.c_str());
 
 	if (m_debug)
 		LogDebug("APRS ==> %s", output);
@@ -270,22 +275,22 @@ void CAPRSWriter::sendIdFrameMobile()
 		::sprintf(desc, "MMDVM Voice %.5LfMHz %c%.4lfMHz%s%s",
 			(long double)(m_txFrequency) / 1000000.0F,
 			offset < 0.0F ? '-' : '+',
-			::fabs(offset), m_desc.empty() ? "" : "; ", m_desc.c_str());
+			::fabs(offset), m_desc.empty() ? "" : ", ", m_desc.c_str());
 	} else {
-		::sprintf(desc, "MMDVM Voice%s%s", m_desc.empty() ? "" : "; ", m_desc.c_str());
+		::sprintf(desc, "MMDVM Voice%s%s", m_desc.empty() ? "" : ", ", m_desc.c_str());
 	}
 
 	const char* band = "4m";
-	if (m_txFrequency >= 1200000000U)
-		band = "23cm/1.2GHz";
-	else if (m_txFrequency >= 420000000U)
-		band = "70cm";
-	else if (m_txFrequency >= 144000000U)
-		band = "2m";
-	else if (m_txFrequency >= 50000000U)
-		band = "6m";
-	else if (m_txFrequency >= 28000000U)
-		band = "10m";
+        if (m_txFrequency >= 1200000000U)
+                band = "23cm/1.2GHz";
+        else if (m_txFrequency >= 420000000U)
+                band = "70cm";
+        else if (m_txFrequency >= 144000000U)
+                band = "2m";
+        else if (m_txFrequency >= 50000000U)
+                band = "6m";
+        else if (m_txFrequency >= 28000000U)
+                band = "10m";
 
 	double tempLat  = ::fabs(rawLatitude);
 	double tempLong = ::fabs(rawLongitude);
@@ -303,18 +308,21 @@ void CAPRSWriter::sendIdFrameMobile()
 	::sprintf(lon, "%08.2lf", longitude);
 
 	std::string server = m_callsign;
+	std::string symbol = m_symbol;
 	size_t pos = server.find_first_of('-');
 	if (pos == std::string::npos)
 		server.append("-S");
 	else
 		server.append("S");
 
-        char output[1500U];
-	::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cW%s%ci\r\n%s>APDG03:>Powered by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n",
-                m_callsign.c_str(), server.c_str(),
-                lat, (m_latitude < 0.0F)  ? 'S' : 'N',
-                lon, (m_longitude < 0.0F) ? 'W' : 'E',
-                m_callsign.c_str());
+        if (symbol.empty())
+                symbol.append("D&");
+
+	char output[500U];
+	::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%c%c%s%c%c",
+		m_callsign.c_str(), server.c_str(),
+		lat, (rawLatitude < 0.0F)  ? 'S' : 'N', symbol[0],
+		lon, (rawLongitude < 0.0F) ? 'W' : 'E',symbol[0]);
 
 	if (bearingSet && velocitySet)
 		::sprintf(output + ::strlen(output), "%03.0f/%03.0f", rawBearing, rawVelocity * 0.539957F);

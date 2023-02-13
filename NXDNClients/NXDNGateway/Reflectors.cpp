@@ -90,7 +90,7 @@ bool CReflectors::load()
 					refl->m_addrLen = addrLen;
 					m_reflectors.push_back(refl);
 				} else {
-					LogDebug("Unable to resolve the address of %s", host.c_str());
+					LogWarning("Unable to resolve the address of %s", host.c_str());
 				}
 			}
 		}
@@ -125,7 +125,7 @@ bool CReflectors::load()
 						refl->m_addrLen = addrLen;
 						m_reflectors.push_back(refl);
 					} else {
-						LogDebug("Unable to resolve the address of %s", host.c_str());
+						LogWarning("Unable to resolve the address of %s", host.c_str());
 					}
 				}
 			}
@@ -149,7 +149,7 @@ bool CReflectors::load()
 			m_reflectors.push_back(refl);
 			LogInfo("Loaded NXDN parrot (TG%u)", refl->m_id);
 		} else {
-			LogDebug("Unable to resolve the address of the NXDN Parrot");
+			LogWarning("Unable to resolve the address of the NXDN Parrot");
 		}
 	}
 
@@ -165,7 +165,7 @@ bool CReflectors::load()
 			m_reflectors.push_back(refl);
 			LogInfo("Loaded NXDN2DMR (TG%u)", refl->m_id);
 		} else {
-			LogDebug("Unable to resolve the address of NXDN2DMR");
+			LogWarning("Unable to resolve the address of NXDN2DMR");
 		}
 	}
 

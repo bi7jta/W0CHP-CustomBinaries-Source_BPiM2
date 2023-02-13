@@ -428,7 +428,6 @@ int CDGIdGateway::run()
 					dgId = 0U;
 
 				if (currentDGId == UNSET_DGID) {
-
 					if (dgIdNetwork[dgId] != NULL && !dgIdNetwork[dgId]->m_static) {
 						dgIdNetwork[dgId]->link();
 						dgIdNetwork[dgId]->link();
@@ -615,8 +614,9 @@ void CDGIdGateway::createGPS()
 	unsigned int txFrequency = m_conf.getTxFrequency();
 	unsigned int rxFrequency = m_conf.getRxFrequency();
 	std::string desc         = m_conf.getAPRSDescription();
+	std::string symbol  = m_conf.getAPRSSymbol();
 
-	m_writer->setInfo(txFrequency, rxFrequency, desc);
+	m_writer->setInfo(txFrequency, rxFrequency, desc, symbol);
 
 	bool enabled = m_conf.getGPSDEnabled();
 	if (enabled) {
