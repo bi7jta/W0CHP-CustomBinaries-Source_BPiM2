@@ -35,6 +35,7 @@ m_latitude(0.0F),
 m_longitude(0.0F),
 m_height(0),
 m_desc(),
+m_symbol(),
 m_aprsAddr(),
 m_aprsLen(0U),
 m_aprsSocket()
@@ -56,11 +57,13 @@ CAPRSWriter::~CAPRSWriter()
 {
 }
 
-void CAPRSWriter::setInfo(unsigned int txFrequency, unsigned int rxFrequency, const std::string& desc)
+void CAPRSWriter::setInfo(unsigned int txFrequency, unsigned int rxFrequency, const std::string& desc, const std::string& symbol)
+
 {
 	m_txFrequency = txFrequency;
 	m_rxFrequency = rxFrequency;
 	m_desc        = desc;
+	m_symbol      = symbol;
 }
 
 void CAPRSWriter::setLocation(float latitude, float longitude, int height)
@@ -118,7 +121,7 @@ void CAPRSWriter::sendIdFrame()
 			offset < 0.0F ? '-' : '+',
 			::fabs(offset), m_desc.empty() ? "" : "; ", m_desc.c_str());
 	} else {
-		::sprintf(desc, "MMDVM Voice%s%s", m_desc.empty() ? "" : "; ", m_desc.c_str());
+		::sprintf(desc, "MMDVM Voice %s%s", m_desc.empty() ? "" : "; ", m_desc.c_str());
 	}
 
 	const char* band = "4m";
@@ -149,17 +152,21 @@ void CAPRSWriter::sendIdFrame()
 	::sprintf(lon, "%08.2lf", longitude);
 
 	std::string server = m_callsign;
+	std::string symbol = m_symbol;
 	size_t pos = server.find_first_of('-');
 	if (pos == std::string::npos)
 		server.append("-S");
 	else
 		server.append("S");
 
-	char output[1500U];
-	::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%cW%s%ci/A=%06.0f%s %s\r\n%s>APDG03:>Powered by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n",
+        if (symbol.empty())
+                symbol.append("D&");
+
+	char output[1000U];
+	::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%c%c%s%c%c/A=%06.0f%s %s\r\n%s>APDG03:>Powered by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n",
 		m_callsign.c_str(), server.c_str(),
-		lat, (m_latitude < 0.0F)  ? 'S' : 'N',
-		lon, (m_longitude < 0.0F) ? 'W' : 'E',
+		lat, (m_latitude < 0.0F)  ? 'S' : 'N', symbol[0],
+		lon, (m_longitude < 0.0F) ? 'W' : 'E', symbol[1],
 		float(m_height) * 3.28F, band, desc,
 		m_callsign.c_str());
 
