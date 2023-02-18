@@ -344,17 +344,17 @@ void CAPRSWriter::sendIdFramesFixed()
 		wxString desc;
 		if (entry->getBand().Len() > 1U) {
 			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("MMDVM Data %.5lfMHz; APRS for ircDDBGateway"), entry->getFrequency());
+				desc.Printf(wxT("MMDVM Data (D-Star) %.5lfMHz, APRS for ircDDBGateway"), entry->getFrequency());
 			else
-				desc = wxT("MMDVM Data; APRS for ircDDBGateway");
+				desc = wxT("MMDVM Data (D-Star), APRS for ircDDBGateway");
 		} else {
                         if (entry->getFrequency() != 0.0)
-                                desc.Printf(wxT("MMDVM Voice %.5lfMHz %c%.4lfMHz; APRS for ircDDBGateway"),
+				desc.Printf(wxT("MMDVM Voice (D-Star) %.5lfMHz %c%.4lfMHz, APRS for ircDDBGateway"),
                                                 entry->getFrequency(),
                                                 entry->getOffset() < 0.0 ? wxT('-') : wxT('+'),
                                                 ::fabs(entry->getOffset()));
 			else
-				desc = wxT("MMDVM Voice; APRS for ircDDBGateway");
+				desc = wxT("MMDVM Voice (D-Star), APRS for ircDDBGateway");
 		}
 
 		wxString band;
@@ -491,17 +491,17 @@ void CAPRSWriter::sendIdFramesMobile()
 		wxString desc;
 		if (entry->getBand().Len() > 1U) {
 			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("MMDVM Data %.5lfMHz"), entry->getFrequency());
+				desc.Printf(wxT("MMDVM Data (D-Star) %.5lfMHz"), entry->getFrequency());
 			else
-				desc = wxT("MMDVM Data");
+				desc = wxT("MMDVM Data (D-Star)");
 		} else {
 			if (entry->getFrequency() != 0.0)
-				desc.Printf(wxT("MMDVM Voice %.5lfMHz %c%.4lfMHz"),
+				desc.Printf(wxT("MMDVM Voice (D-Star) %.5lfMHz %c%.4lfMHz"),
 						entry->getFrequency(),
 						entry->getOffset() < 0.0 ? wxT('-') : wxT('+'),
 						::fabs(entry->getOffset()));
 			else
-				desc = wxT("MMDVM Voice");
+				desc = wxT("MMDVM Voice (D-Star)");
 		}
 
 		wxString band;
