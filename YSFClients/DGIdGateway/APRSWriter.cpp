@@ -235,10 +235,11 @@ void CAPRSWriter::sendIdFrameFixed()
 	if (m_txFrequency != 0U) {
 		float offset = float(int(m_rxFrequency) - int(m_txFrequency)) / 1000000.0F;
 		::sprintf(desc, "MMDVM Voice (C4FM) %.5LfMHz %c%.4lfMHz%s%s",
+			(long double)(m_txFrequency) / 1000000.0F,
 			offset < 0.0F ? '-' : '+',
 			::fabs(offset), m_desc.empty() ? "" : ", ", m_desc.c_str());
 	} else {
-		::sprintf(desc, "MMDVM Voice (C4FM)%s%s", m_desc.empty() ? "" : ", ", m_desc.c_str());
+		::sprintf(desc, "MMDVM Voice(C4FM)%s%s", m_desc.empty() ? "" : ", ", m_desc.c_str());
 	}
 
         const char* band = "4m";
@@ -338,6 +339,7 @@ void CAPRSWriter::sendIdFrameMobile()
 	} else {
 		::sprintf(desc, "MMDVM Voice (C4FM)%s%s", m_desc.empty() ? "" : ", ", m_desc.c_str());
 	}
+
 
         const char* band = "4m";
         if (m_txFrequency >= 1200000000U)
