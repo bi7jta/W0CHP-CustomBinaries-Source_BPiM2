@@ -239,7 +239,7 @@ void CAPRSWriter::sendIdFrameFixed()
 			offset < 0.0F ? '-' : '+',
 			::fabs(offset), m_desc.empty() ? "" : ", ", m_desc.c_str());
 	} else {
-		::sprintf(desc, "MMDVM Voice(C4FM)%s%s", m_desc.empty() ? "" : ", ", m_desc.c_str());
+		::sprintf(desc, "MMDVM Voice (C4FM)%s%s", m_desc.empty() ? "" : ", ", m_desc.c_str());
 	}
 
         const char* band = "4m";
