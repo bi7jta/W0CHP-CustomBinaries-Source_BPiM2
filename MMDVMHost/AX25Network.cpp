@@ -53,7 +53,7 @@ CAX25Network::~CAX25Network()
 
 bool CAX25Network::open()
 {
-	LogDebug("Opening AX25 network connection");
+	LogMessage("Opening AX25 network connection");
 
 	return m_serial.open();
 }
@@ -169,7 +169,7 @@ void CAX25Network::close()
 {
 	m_serial.close();
 
-	LogDebug("Closing AX25 network connection");
+	LogMessage("Closing AX25 network connection");
 }
 
 void CAX25Network::enable(bool enabled)

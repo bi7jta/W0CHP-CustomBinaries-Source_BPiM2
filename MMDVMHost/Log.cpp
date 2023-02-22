@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2015,2016,2020 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2015,2016,2020,2022,2023 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
  */
 
 #include "Log.h"
+#include "MQTTPublisher.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <Windows.h>
@@ -31,6 +32,10 @@
 #include <ctime>
 #include <cassert>
 #include <cstring>
+
+CMQTTPublisher* m_mqtt = NULL;
+
+static unsigned int m_mqttLevel = 2U;
 
 static unsigned int m_fileLevel = 2U;
 static std::string m_filePath;
@@ -124,10 +129,11 @@ bool LogOpen()
 		return logOpenNoRotate();
 }
 
-bool LogInitialise(bool daemon, const std::string& filePath, const std::string& fileRoot, unsigned int fileLevel, unsigned int displayLevel, bool rotate)
+bool LogInitialise(bool daemon, const std::string& filePath, const std::string& fileRoot, unsigned int fileLevel, unsigned int displayLevel, unsigned int mqttLevel, bool rotate)
 {
 	m_filePath     = filePath;
 	m_fileRoot     = fileRoot;
+	m_mqttLevel    = mqttLevel;
 	m_fileLevel    = fileLevel;
 	m_displayLevel = displayLevel;
 	m_daemon       = daemon;
@@ -143,6 +149,12 @@ void LogFinalise()
 {
 	if (m_fpLog != NULL)
 		::fclose(m_fpLog);
+
+	if (m_mqtt != NULL) {
+		m_mqtt->close();
+		delete m_mqtt;
+		m_mqtt = NULL;
+	}
 }
 
 void Log(unsigned int level, const char* fmt, ...)
@@ -171,6 +183,9 @@ void Log(unsigned int level, const char* fmt, ...)
 
 	va_end(vl);
 
+	if (m_mqtt != NULL && level >= m_mqttLevel && m_mqttLevel != 0U)
+		m_mqtt->publish("log", buffer);
+
 	if (level >= m_fileLevel && m_fileLevel != 0U) {
 		bool ret = ::LogOpen();
 		if (!ret)
@@ -190,3 +205,15 @@ void Log(unsigned int level, const char* fmt, ...)
 		exit(1);
 	}
 }
+
+void WriteJSON(const std::string& topLevel, nlohmann::json& json)
+{
+	if (m_mqtt != NULL) {
+		nlohmann::json top;
+
+		top[topLevel] = json;
+
+		m_mqtt->publish("json", top.dump().c_str());
+	}
+}
+

@@ -225,7 +225,7 @@ bool CUDPSocket::open(const unsigned int index, const unsigned int af, const std
 			return false;
 		}
 
-		LogDebug("Opening UDP port on %hu", port);
+		LogInfo("Opening UDP port on %hu", port);
 	}
 
 	return true;

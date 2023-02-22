@@ -56,7 +56,7 @@ bool CUserDB::lookup(unsigned int id, class CUserDBentry *entry)
 
 bool CUserDB::load(std::string const& filename)
 {
-	LogDebug("Loading ID lookup table from %s", filename.c_str());
+	LogInfo("Loading ID lookup table from %s", filename.c_str());
 
 	FILE* fp = ::fopen(filename.c_str(), "rt");
 	if (fp == NULL) {
@@ -96,7 +96,7 @@ bool CUserDB::load(std::string const& filename)
 	size_t size = m_table.size();
 	m_mutex.unlock();
 
-	LogDebug("Loaded %u IDs to lookup table - %s", size, filename.c_str());
+	LogInfo("Loaded %u IDs to lookup table - %s", size, filename.c_str());
 
 	return size != 0U;
 }

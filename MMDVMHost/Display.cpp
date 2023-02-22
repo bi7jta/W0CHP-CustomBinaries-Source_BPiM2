@@ -542,15 +542,15 @@ CDisplay* CDisplay::createDisplay(const CConf& conf, CModem* modem)
 	std::string type   = conf.getDisplay();
 	unsigned int dmrid = conf.getDMRId();
 
-	LogDebug("Display Parameters");
-	LogDebug("    Type: %s", type.c_str());
+	LogInfo("Display Parameters");
+	LogInfo("    Type: %s", type.c_str());
 
 	if (type == "TFT Surenoo") {
 		std::string port        = conf.getTFTSerialPort();
 		unsigned int brightness = conf.getTFTSerialBrightness();
 
-		LogDebug("    Port: %s", port.c_str());
-		LogDebug("    Brightness: %u", brightness);
+		LogInfo("    Port: %s", port.c_str());
+		LogInfo("    Brightness: %u", brightness);
 
 		ISerialPort* serial = NULL;
 		if (port == "modem")
@@ -570,29 +570,29 @@ CDisplay* CDisplay::createDisplay(const CConf& conf, CModem* modem)
 		unsigned int rxFrequency    = conf.getRXFrequency();
 		bool displayTempInF         = conf.getNextionTempInFahrenheit();
 
-		LogDebug("    Port: %s", port.c_str());
-		LogDebug("    Brightness: %u", brightness);
-		LogDebug("    Clock Display: %s", displayClock ? "yes" : "no");
+		LogInfo("    Port: %s", port.c_str());
+		LogInfo("    Brightness: %u", brightness);
+		LogInfo("    Clock Display: %s", displayClock ? "yes" : "no");
 		if (displayClock)
-			LogDebug("    Display UTC: %s", utc ? "yes" : "no");
-		LogDebug("    Idle Brightness: %u", idleBrightness);
-		LogDebug("    Temperature in Fahrenheit: %s ", displayTempInF ? "yes" : "no");
+			LogInfo("    Display UTC: %s", utc ? "yes" : "no");
+		LogInfo("    Idle Brightness: %u", idleBrightness);
+		LogInfo("    Temperature in Fahrenheit: %s ", displayTempInF ? "yes" : "no");
  
 		switch (screenLayout) {
 		case 0U:
-			LogDebug("    Screen Layout: G4KLX (Default)");
+			LogInfo("    Screen Layout: G4KLX (Default)");
 			break;
 		case 2U:
-			LogDebug("    Screen Layout: ON7LDS");
+			LogInfo("    Screen Layout: ON7LDS");
 			break;
 		case 3U:
-			LogDebug("    Screen Layout: DIY by ON7LDS");
+			LogInfo("    Screen Layout: DIY by ON7LDS");
 			break;
 		case 4U:
-			LogDebug("    Screen Layout: DIY by ON7LDS (High speed)");
+			LogInfo("    Screen Layout: DIY by ON7LDS (High speed)");
 			break;
 		default:
-			LogDebug("    Screen Layout: %u (Unknown)", screenLayout);
+			LogInfo("    Screen Layout: %u (Unknown)", screenLayout);
 			break;
 		}
 
@@ -604,7 +604,7 @@ CDisplay* CDisplay::createDisplay(const CConf& conf, CModem* modem)
 			if (screenLayout == 4U)
 				baudrate = 115200U;
 			
-			LogDebug("    Display baudrate: %u ", baudrate);
+			LogInfo("    Display baudrate: %u ", baudrate);
 			ISerialPort* serial = new CUARTController(port, baudrate);
 			display = new CNextion(conf.getCallsign(), dmrid, serial, brightness, displayClock, utc, idleBrightness, screenLayout, txFrequency, rxFrequency, displayTempInF);
 		}
@@ -616,19 +616,19 @@ CDisplay* CDisplay::createDisplay(const CConf& conf, CModem* modem)
 		bool utc                  = conf.getLCDprocUTC();
 		bool dimOnIdle            = conf.getLCDprocDimOnIdle();
 
-		LogDebug("    Address: %s", address.c_str());
-		LogDebug("    Port: %u", port);
+		LogInfo("    Address: %s", address.c_str());
+		LogInfo("    Port: %u", port);
 
 		if (localPort == 0 )
-			LogDebug("    Local Port: random");
+			LogInfo("    Local Port: random");
 		else
-			LogDebug("    Local Port: %u", localPort);
+			LogInfo("    Local Port: %u", localPort);
 
-		LogDebug("    Dim Display on Idle: %s", dimOnIdle ? "yes" : "no");
-		LogDebug("    Clock Display: %s", displayClock ? "yes" : "no");
+		LogInfo("    Dim Display on Idle: %s", dimOnIdle ? "yes" : "no");
+		LogInfo("    Clock Display: %s", displayClock ? "yes" : "no");
 
 		if (displayClock)
-			LogDebug("    Display UTC: %s", utc ? "yes" : "no");
+			LogInfo("    Display UTC: %s", utc ? "yes" : "no");
 
 		display = new CLCDproc(address.c_str(), port, localPort, conf.getCallsign(), dmrid, displayClock, utc, conf.getDuplex(), dimOnIdle);
 #if defined(HD44780)
@@ -645,25 +645,25 @@ CDisplay* CDisplay::createDisplay(const CConf& conf, CModem* modem)
 		bool utc                       = conf.getHD44780UTC();
 
 		if (pins.size() == 6U) {
-			LogDebug("    Rows: %u", rows);
-			LogDebug("    Columns: %u", columns);
+			LogInfo("    Rows: %u", rows);
+			LogInfo("    Columns: %u", columns);
 
 #if defined(ADAFRUIT_DISPLAY) || defined(PCF8574_DISPLAY)
-			LogDebug("    Device Address: %#x", i2cAddress);
+			LogInfo("    Device Address: %#x", i2cAddress);
 #else
-			LogDebug("    Pins: %u,%u,%u,%u,%u,%u", pins.at(0U), pins.at(1U), pins.at(2U), pins.at(3U), pins.at(4U), pins.at(5U));
+			LogInfo("    Pins: %u,%u,%u,%u,%u,%u", pins.at(0U), pins.at(1U), pins.at(2U), pins.at(3U), pins.at(4U), pins.at(5U));
 #endif
 
-			LogDebug("    PWM Backlight: %s", pwm ? "yes" : "no");
+			LogInfo("    PWM Backlight: %s", pwm ? "yes" : "no");
 			if (pwm) {
-				LogDebug("    PWM Pin: %u", pwmPin);
-				LogDebug("    PWM Bright: %u", pwmBright);
-				LogDebug("    PWM Dim: %u", pwmDim);
+				LogInfo("    PWM Pin: %u", pwmPin);
+				LogInfo("    PWM Bright: %u", pwmBright);
+				LogInfo("    PWM Dim: %u", pwmDim);
 			}
 
-			LogDebug("    Clock Display: %s", displayClock ? "yes" : "no");
+			LogInfo("    Clock Display: %s", displayClock ? "yes" : "no");
 			if (displayClock)
-				LogDebug("    Display UTC: %s", utc ? "yes" : "no");
+				LogInfo("    Display UTC: %s", utc ? "yes" : "no");
 
 			display = new CHD44780(rows, columns, conf.getCallsign(), dmrid, pins, i2cAddress, pwm, pwmPin, pwmBright, pwmDim, displayClock, utc, conf.getDuplex());
 		}

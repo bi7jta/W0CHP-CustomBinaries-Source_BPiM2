@@ -126,7 +126,7 @@ bool CDMRDirectNetwork::open()
 		return false;
 	}
 
-	LogDebug("Opening DMR Network");
+	LogMessage("Opening DMR Network");
 
 	m_status = WAITING_CONNECT;
 	m_timeoutTimer.stop();
@@ -323,7 +323,7 @@ bool CDMRDirectNetwork::isConnected() const
 
 void CDMRDirectNetwork::close(bool sayGoodbye)
 {
-	LogDebug("Closing DMR Network");
+	LogMessage("Closing DMR Network");
 
 	if (sayGoodbye && (m_status == RUNNING)) {
 		unsigned char buffer[9U];

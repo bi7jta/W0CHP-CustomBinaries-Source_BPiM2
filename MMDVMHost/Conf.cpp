@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2015-2021 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2015-2022 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ enum SECTION {
 	SECTION_GENERAL,
 	SECTION_INFO,
 	SECTION_LOG,
+	SECTION_MQTT,
 	SECTION_CWID,
 	SECTION_DMRID_LOOKUP,
 	SECTION_NXDNID_LOOKUP,
@@ -81,11 +82,16 @@ m_height(0),
 m_location(),
 m_description(),
 m_url(),
+m_logMQTTLevel(0U),
 m_logDisplayLevel(0U),
 m_logFileLevel(0U),
 m_logFilePath(),
 m_logFileRoot(),
 m_logFileRotate(true),
+m_mqttHost("127.0.0.1"),
+m_mqttPort(1883),
+m_mqttKeepalive(60U),
+m_mqttName("mmdvm"),
 m_cwIdEnabled(false),
 m_cwIdTime(10U),
 m_cwIdCallsign(),
@@ -369,6 +375,8 @@ bool CConf::read()
 				section = SECTION_INFO;
 			else if (::strncmp(buffer, "[Log]", 5U) == 0)
 				section = SECTION_LOG;
+			else if (::strncmp(buffer, "[MQTT]", 6U) == 0)
+				section = SECTION_MQTT;
 			else if (::strncmp(buffer, "[CW Id]", 7U) == 0)
 				section = SECTION_CWID;
 			else if (::strncmp(buffer, "[DMR Id Lookup]", 15U) == 0)
@@ -507,12 +515,23 @@ bool CConf::read()
 				m_logFilePath = value;
 			else if (::strcmp(key, "FileRoot") == 0)
 				m_logFileRoot = value;
+			else if (::strcmp(key, "MQTTLevel") == 0)
+				m_logMQTTLevel = (unsigned int)::atoi(value);
 			else if (::strcmp(key, "FileLevel") == 0)
 				m_logFileLevel = (unsigned int)::atoi(value);
 			else if (::strcmp(key, "DisplayLevel") == 0)
 				m_logDisplayLevel = (unsigned int)::atoi(value);
 			else if (::strcmp(key, "FileRotate") == 0)
 				m_logFileRotate = ::atoi(value) == 1;
+		} else if (section == SECTION_MQTT) {
+			if (::strcmp(key, "Host") == 0)
+				m_mqttHost = value;
+			else if (::strcmp(key, "Port") == 0)
+				m_mqttPort = (unsigned short)::atoi(value);
+			else if (::strcmp(key, "Keepalive") == 0)
+				m_mqttKeepalive = (unsigned int)::atoi(value);
+			else if (::strcmp(key, "Name") == 0)
+				m_mqttName = value;
 		} else if (section == SECTION_CWID) {
 			if (::strcmp(key, "Enable") == 0)
 				m_cwIdEnabled = ::atoi(value) == 1;
@@ -1228,6 +1247,11 @@ std::string CConf::getURL() const
 	return m_url;
 }
 
+unsigned int CConf::getLogMQTTLevel() const
+{
+	return m_logMQTTLevel;
+}
+
 unsigned int CConf::getLogDisplayLevel() const
 {
 	return m_logDisplayLevel;
@@ -1251,6 +1275,26 @@ std::string CConf::getLogFileRoot() const
 bool CConf::getLogFileRotate() const
 {
 	return m_logFileRotate;
+}
+
+std::string CConf::getMQTTHost() const
+{
+	return m_mqttHost;
+}
+
+unsigned short CConf::getMQTTPort() const
+{
+	return m_mqttPort;
+}
+
+unsigned int CConf::getMQTTKeepalive() const
+{
+	return m_mqttKeepalive;
+}
+
+std::string CConf::getMQTTName() const
+{
+	return m_mqttName;
 }
 
 bool CConf::getCWIdEnabled() const

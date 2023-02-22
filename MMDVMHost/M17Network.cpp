@@ -62,7 +62,7 @@ bool CM17Network::open()
 		return false;
 	}
 
-	LogDebug("Opening M17 network connection");
+	LogMessage("Opening M17 network connection");
 
 	bool ret = m_socket.open(m_addr);
 
@@ -177,7 +177,7 @@ void CM17Network::close()
 {
 	m_socket.close();
 
-	LogDebug("Closing M17 network connection");
+	LogMessage("Closing M17 network connection");
 }
 
 void CM17Network::reset()

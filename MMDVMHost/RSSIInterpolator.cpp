@@ -60,7 +60,7 @@ bool CRSSIInterpolator::load(const std::string& filename)
 
 	::fclose(fp);
 
-	LogDebug("Loaded %u RSSI data mapping points from %s", m_map.size(), filename.c_str());
+	LogInfo("Loaded %u RSSI data mapping points from %s", m_map.size(), filename.c_str());
 	
 	return true;
 }

@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2018,2019,2020 by Jonathan Naylor G4KLX
+*   Copyright (C) 2018,2019,2020,2023 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -29,6 +29,8 @@
 
 #include <string>
 #include <deque>
+
+#include <nlohmann/json.hpp>
 
 struct POCSAGData {
 	unsigned int         m_ric;
@@ -87,6 +89,9 @@ private:
 	void closeFile();
 
 	void decodeROT1(const std::string& in, unsigned int start, std::string& out) const;
+
+	void writeJSON(const char* source, unsigned int ric, const char* functional);
+	void writeJSON(const char* source, unsigned int ric, const char* functional, const std::string& message);
 };
 
 #endif

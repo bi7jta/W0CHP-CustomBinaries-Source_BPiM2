@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2020,2021 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2020,2021,2022 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -31,6 +31,8 @@
 #include "Modem.h"
 
 #include <string>
+
+#include <nlohmann/json.hpp>
 
 class CM17Control {
 public:
@@ -102,6 +104,17 @@ private:
 
 	void writeEndRF();
 	void writeEndNet();
+
+	void writeJSONRF(const char* action, RPT_RF_STATE state, const std::string& source, const std::string& dest);
+	void writeJSONRF(const char* action, RPT_RF_STATE state, const std::string& source, const std::string& dest, float duration, float ber);
+	void writeJSONRF(const char* action, RPT_RF_STATE state, const std::string& source, const std::string& dest, float duration, float ber, unsigned char minRSSI, unsigned char maxRSSI, unsigned int aveRSSI);
+
+	void writeJSONNet(const char* action, RPT_NET_STATE state, const std::string& source, const std::string& dest);
+	void writeJSONNet(const char* action, RPT_NET_STATE state, const std::string& source, const std::string& dest, float duration);
+
+	void writeJSONRF(nlohmann::json& json, const char* action, RPT_RF_STATE state, const std::string& source, const std::string& dest);
+	void writeJSONRF(nlohmann::json& json, const char* action, RPT_RF_STATE state, const std::string& source, const std::string& dest, float duration, float ber);
+	void writeJSONNet(nlohmann::json& json, const char* action, RPT_NET_STATE state, const std::string& source, const std::string& dest);
 
 	bool openFile();
 	bool writeFile(const unsigned char* data);
