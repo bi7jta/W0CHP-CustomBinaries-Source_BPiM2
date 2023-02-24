@@ -21,7 +21,7 @@ DAPNETGateway.o: GitVersion.h FORCE
 FORCE:
 
 install:
-		install -m 755 DAPNETGateway $(HOME)/git/Project_Amunet-bin/x86_64
+		install -m 755 DAPNETGateway $(HOME)/git/Project_Amunet-bin/aarch64/
 
 clean:
 		$(RM) DAPNETGateway *.o *.d *.bak *~ GitVersion.h

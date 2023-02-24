@@ -13,7 +13,7 @@ NextionDriver:
 
 .PHONY install:
 install: all
-		install -m 755 NextionDriver $(HOME)/git/Project_Amunet-bin/x86_64/
+		install -m 755 NextionDriver $(HOME)/git/Project_Amunet-bin/aarch64/
 
 clean:
 		$(RM) NextionDriver *.o *.d *.bak *~

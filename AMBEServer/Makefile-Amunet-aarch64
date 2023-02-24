@@ -15,7 +15,7 @@ clean:
 	$(RM) -f AMBEserver *~ *.bak *.o GitVersion.h
 
 install:
-	install -m 755 AMBEserver $(HOME)/git/Project_Amunet-bin/x86_64/
+	install -m 755 AMBEserver $(HOME)/git/Project_Amunet-bin/aarch64/
 
 init-install:
 	install init.d/AMBEserver /etc/init.d

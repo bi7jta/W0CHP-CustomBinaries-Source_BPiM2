@@ -1,12 +1,12 @@
 export DATADIR := "/usr/local/etc"
 export LOGDIR  := "/var/log/amunet"
 export CONFDIR := "/etc"
-export BINDIR  := "$(HOME)/git/Project_Amunet-bin/x86_64/"
+export BINDIR  := "$(HOME)/git/Project_Amunet-bin/aarch64/"
 
 export CXX     := $(shell wx-config --cxx)
-export CFLAGS  := -s -O2 -Wall $(shell wx-config --cxxflags) -DLOG_DIR='$(LOGDIR)' -DCONF_DIR='$(CONFDIR)' -DDATA_DIR='$(DATADIR)'
+export CFLAGS  := -s -O2 -Wall $(shell wx-config --cxxflags) -DLOG_DIR='$(LOGDIR)' -DCONF_DIR='$(CONFDIR)' -DDATA_DIR='$(DATADIR)' -DGPIO
 export GUILIBS := $(shell wx-config --libs adv,core,base) -lasound
-export LIBS    := $(shell wx-config --libs base) -lasound -lusb-1.0
+export LIBS    := $(shell wx-config --libs base) -lasound -lusb-1.0 -lwiringPi
 export LDFLAGS :=
 
 #all:	DStarRepeater/dstarrepeaterd DStarRepeaterConfig/dstarrepeaterconfig

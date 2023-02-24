@@ -20,7 +20,7 @@ NXDN2DMR:	$(OBJECTS)
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
 install:
-		install -m 755 NXDN2DMR $(HOME)/git/Project_Amunet-bin/x86_64/
+		install -m 755 NXDN2DMR $(HOME)/git/Project_Amunet-bin/aarch64/
 
 clean:
 		$(RM) NXDN2DMR *.o *.d *.bak *~

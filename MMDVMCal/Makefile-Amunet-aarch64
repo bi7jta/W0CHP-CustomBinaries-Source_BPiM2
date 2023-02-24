@@ -48,7 +48,7 @@ YSFFICH.o:	YSFFICH.cpp CRC.h Golay24128.h YSFConvolution.h YSFDefines.h YSFFICH.
 		$(CXX) $(CXXFLAGS) -c YSFFICH.cpp
 
 install:
-		install -m 755 MMDVMCal $(HOME)/git/Project_Amunet-bin/x86_64/
+		install -m 755 MMDVMCal $(HOME)/dev/W0CHP-PiStar-bin/aarch64/
 
 clean:
 		rm -f *.o *.bak *~ MMDVMCal

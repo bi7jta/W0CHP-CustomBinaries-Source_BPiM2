@@ -12,7 +12,7 @@ else
 export DATADIR ?= /usr/local/etc
 export LOGDIR  ?= /var/log/amunet
 export CONFDIR ?= /etc
-export BINDIR  ?= $(HOME)/git/Project_Amunet-bin/x86_64/
+export BINDIR  ?= $(HOME)/git/Project_Amunet-bin/aarch64/
 endif
 
 # Add -DDCS_LINK to the end of the CFLAGS line below to add DCS linking to StarNet
