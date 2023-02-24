@@ -35,8 +35,8 @@ RemoteCommand:	Log.o RemoteCommand.o UDPSocket.o
 
 .PHONY install:
 install: all
-		install -m 755 MMDVMHost $(HOME)/dev/W0CHP-PiStar-bin/
-		install -m 755 RemoteCommand $(HOME)/dev/W0CHP-PiStar-bin/
+		install -m 755 MMDVMHost $(HOME)/git/Project_Amunet-bin/aarch64/
+		install -m 755 RemoteCommand $(HOME)/git/Project_Amunet-bin/aarch64/
 
 .PHONY install-service:
 install-service: install /etc/MMDVM.ini

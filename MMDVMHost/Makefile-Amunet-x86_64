@@ -30,8 +30,8 @@ RemoteCommand:	Log.o MQTTPublisher.o RemoteCommand.o UDPSocket.o
 
 .PHONY install:
 install: all
-		install -m 755 MMDVMHost $(HOME)/git/Project_Amunet-bin/
-		install -m 755 RemoteCommand $(HOME)/git/Project_Amunet-bin/
+		install -m 755 MMDVMHost $(HOME)/git/Project_Amunet-bin/x86_64/
+		install -m 755 RemoteCommand $(HOME)/git/Project_Amunet-bin/x86_64/
 
 .PHONY install-service:
 install-service: install /etc/MMDVM.ini
