@@ -39,7 +39,7 @@ m_time()
 	m_data = new CAMBEData*[NUM_FRAMES];
 
 	wxString versionText;
-	versionText.Printf(wxT("ircDDB GW - %s"), VERSION.Left(8U).c_str());
+	versionText.Printf(wxT("ircDDBGateway - %s"), VERSION.c_str());
 
 	wxLogMessage(wxT("Version text set to \"%s\""), versionText.c_str());
 
