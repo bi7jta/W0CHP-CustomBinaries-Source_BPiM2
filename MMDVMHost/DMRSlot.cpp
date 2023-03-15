@@ -1333,15 +1333,12 @@ void CDMRSlot::writeNetwork(const CDMRData& dmrData)
 		std::string src = m_lookup->find(srcId);
 		std::string dst = m_lookup->find(dstId);
 
-                class CUserDBentry cn;
-                m_lookup->findWithName(m_netLC->getSrcId(), &cn);
-
 		m_display->writeDMR(m_slotNo, src, gi, dst, "N");
 
 		LogMessage("DMR Slot %u, received network data header from %s to %s%s, %u blocks", m_slotNo, src.c_str(), gi ? "TG ": "", dst.c_str(), m_netFrames);
 
 		if (m_netFrames == 0U) {
-			LogMessage("DMR Slot %u, ended network data transmission from %s to %s%s - Name: %s", m_slotNo, src.c_str(), gi ? "TG " : "", dst.c_str(), cn.get(keyFIRST_NAME).c_str());
+			LogMessage("DMR Slot %u, ended network data transmission from %s to %s%s", m_slotNo, src.c_str(), gi ? "TG " : "", dst.c_str());
 			writeEndNet();
 		}
 	} else if (dataType == DT_VOICE_SYNC) {
