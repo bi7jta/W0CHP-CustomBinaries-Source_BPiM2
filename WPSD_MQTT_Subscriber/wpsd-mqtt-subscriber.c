@@ -24,7 +24,7 @@
 #include <mosquitto.h>
 #include <cjson/cJSON.h>
 #include <ini.h>
-#define MAX_MESSAGES 100
+#define MAX_MESSAGES 300
 
 struct topic_data
 {
@@ -35,43 +35,32 @@ struct topic_data
 
 static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto_message *msg)
 {
-	struct topic_data *data = (struct topic_data *) obj;
+    struct topic_data *data = (struct topic_data *) obj;
 
-	cJSON *json = cJSON_Parse(msg->payload);
-	if (json == NULL)
-	{
-		fprintf(stderr, "Error parsing JSON message: %s\n", cJSON_GetErrorPtr());
-		return;
-	}
+    // write raw JSON to file
+    FILE *fp = fopen(data->output_file, "a");  // use append mode to avoid overwriting previous content
+    if (fp == NULL)
+    {
+        fprintf(stderr, "Error opening file %s: %s\n", data->output_file, strerror(errno));
+        return;
+    }
 
-	cJSON_AddItemToArray(data->messages, json);
+    fprintf(fp, "%.*s\n", (int)msg->payloadlen, (char *)msg->payload);
+    fclose(fp);
 
-	// remove oldest message if we've reached the maximum
-	int num_messages = cJSON_GetArraySize(data->messages);
-	if (num_messages > MAX_MESSAGES)
-	{
-		cJSON_DeleteItemFromArray(data->messages, 0);
-	}
+    // remove oldest message if we've reached the maximum
+    int num_messages = cJSON_GetArraySize(data->messages);
+    if (num_messages >= MAX_MESSAGES)
+    {
+        cJSON_DeleteItemFromArray(data->messages, 0);
+    }
 
-	// write JSON array to file
-	FILE *fp = fopen(data->output_file, "w");
-	if (fp == NULL)
-	{
-		fprintf(stderr, "Error opening file %s: %s\n", data->output_file, strerror(errno));
-		return;
-	}
-
-	char *json_str = cJSON_Print(data->messages);
-	if (json_str == NULL)
-	{
-		fprintf(stderr, "Error printing JSON: %s\n", cJSON_GetErrorPtr());
-		fclose(fp);
-		return;
-	}
-
-	fprintf(fp, "%s\n", json_str);
-	fclose(fp);
-	free(json_str);
+    // add message to cJSON array
+    cJSON *json = cJSON_CreateObject();
+    cJSON_AddStringToObject(json, "topic", msg->topic);
+    cJSON_AddNumberToObject(json, "qos", msg->qos);
+    cJSON_AddStringToObject(json, "payload", (char *)msg->payload);
+    cJSON_AddItemToArray(data->messages, json);
 }
 
 static int read_config(void *user, const char *section, const char *name, const char *value)
