@@ -35,32 +35,32 @@ struct topic_data
 
 static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto_message *msg)
 {
-    struct topic_data *data = (struct topic_data *) obj;
+	struct topic_data *data = (struct topic_data *) obj;
 
-    // write raw JSON to file
-    FILE *fp = fopen(data->output_file, "a");  // use append mode to avoid overwriting previous content
-    if (fp == NULL)
-    {
-        fprintf(stderr, "Error opening file %s: %s\n", data->output_file, strerror(errno));
-        return;
-    }
+	// write raw JSON to file
+	FILE *fp = fopen(data->output_file, "a");	// use append mode to avoid overwriting previous content
+	if (fp == NULL)
+	{
+		fprintf(stderr, "Error opening file %s: %s\n", data->output_file, strerror(errno));
+		return;
+	}
 
-    fprintf(fp, "%.*s\n", (int)msg->payloadlen, (char *)msg->payload);
-    fclose(fp);
+	fprintf(fp, "%.*s\n", (int) msg->payloadlen, (char*) msg->payload);
+	fclose(fp);
 
-    // remove oldest message if we've reached the maximum
-    int num_messages = cJSON_GetArraySize(data->messages);
-    if (num_messages >= MAX_MESSAGES)
-    {
-        cJSON_DeleteItemFromArray(data->messages, 0);
-    }
+	// remove oldest message if we've reached the maximum
+	int num_messages = cJSON_GetArraySize(data->messages);
+	if (num_messages >= MAX_MESSAGES)
+	{
+		cJSON_DeleteItemFromArray(data->messages, 0);
+	}
 
-    // add message to cJSON array
-    cJSON *json = cJSON_CreateObject();
-    cJSON_AddStringToObject(json, "topic", msg->topic);
-    cJSON_AddNumberToObject(json, "qos", msg->qos);
-    cJSON_AddStringToObject(json, "payload", (char *)msg->payload);
-    cJSON_AddItemToArray(data->messages, json);
+	// add message to cJSON array
+	cJSON *json = cJSON_CreateObject();
+	cJSON_AddStringToObject(json, "topic", msg->topic);
+	cJSON_AddNumberToObject(json, "qos", msg->qos);
+	cJSON_AddStringToObject(json, "payload", (char*) msg->payload);
+	cJSON_AddItemToArray(data->messages, json);
 }
 
 static int read_config(void *user, const char *section, const char *name, const char *value)
@@ -125,6 +125,30 @@ int main(int argc, char *argv[])
 		{
 			fprintf(stderr, "Error connecting to MQTT broker: %s\n", mosquitto_strerror(errno));
 			return EXIT_FAILURE;
+		}
+
+		// check if topic already exists
+		// Check if the topic is valid
+		int rc;
+		int mid;
+		if (mosquitto_sub_topic_check(topics[i].topic) != MOSQ_ERR_SUCCESS)
+		{
+			printf("Invalid topic format: %s\n", topics[i].topic);
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			// create topic if it doesn't exist
+			int qos = 0;
+			bool retain = false;
+			rc = mosquitto_publish(mosq, &mid, topics[i].topic, 0, NULL, qos, retain);
+			if (rc != MOSQ_ERR_SUCCESS)
+			{
+				fprintf(stderr, "Error creating topic %s: %s\n", topics[i].topic, mosquitto_strerror(rc));
+				return EXIT_FAILURE;
+			}
+
+			printf("Topic %s created on broker\n", topics[i].topic);
 		}
 
 		if (mosquitto_subscribe(mosq, NULL, topics[i].topic, 0) != MOSQ_ERR_SUCCESS)
