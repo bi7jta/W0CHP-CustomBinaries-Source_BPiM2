@@ -1,0 +1,13 @@
+[Unit]
+Description=WPSD MQTT Subscriber
+After=network.target
+
+[Service]
+User=www-data
+ExecStart=/usr/local/bin/wpsd-mqtt-subscriber /etc/wpsd-mqtt-subscriber.conf
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+

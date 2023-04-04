@@ -230,7 +230,7 @@ void CAPRSWriter::sendIdFrameFixed()
 		server.append("S");
 
         if (symbol.empty())
-                symbol.append("D&");
+                symbol.append("Wi");
 
 	char output[1000U];
 	::sprintf(output, "%s>APDG17,TCPIP*,qAC,%s:!%s%c%c%s%c%c/A=%06.0f%s %s\r\n%s>APDG03:>Powered by W0CHP-PiStar-Dash (https://wpsd.w0chp.net)\r\n",
@@ -327,7 +327,7 @@ void CAPRSWriter::sendIdFrameMobile()
 		server.append("S");
 
         if (symbol.empty())
-                symbol.append("D&");
+                symbol.append("Wi");
 
 	char output[500U];
 	::sprintf(output, "%s>APDG03,TCPIP*,qAC,%s:!%s%c%c%s%c%c",

@@ -6,7 +6,7 @@ CFLAGS  = -s -O3 -Wall -DHAVE_LOG_H -std=c++0x -pthread -DREMOTE_COMMAND_NO_LOG
 LIBS    = -lpthread
 
 # Use the following CFLAGS and LIBS if you do want to use gpsd.
-#CFLAGS  = -s -O3 -Wall -DHAVE_LOG_H -DUSE_GPSD -std=c++0x -pthread
+#CFLAGS  = -s -O3 -Wall -DHAVE_LOG_H -DUSE_GPSD -std=c++0x -pthread -DREMOTE_COMMAND_NO_LOG
 #LIBS    = -lpthread -lgps
 
 LDFLAGS = -g
